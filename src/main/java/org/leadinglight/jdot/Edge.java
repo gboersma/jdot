@@ -1,5 +1,8 @@
 package org.leadinglight.jdot;
 
+import org.leadinglight.jdot.impl.GraphElement;
+import org.leadinglight.jdot.impl.Options;
+
 public class Edge extends GraphElement {
 	public Edge(Node start, Node end) {
 		_start = start;
@@ -17,7 +20,7 @@ public class Edge extends GraphElement {
 	public String toDot() {
 		String dot;
 
-		if(getGraph().getType() == GraphType.digraph) {
+		if(getGraph().getType() == Graph.Type.digraph) {
 			dot = _start.getName() + " -> " + _end.getName();
 		} else {
 			dot = _start.getName() + " -- " + _end.getName();

@@ -6,10 +6,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.leadinglight.jdot.impl.GraphElement;
+import org.leadinglight.jdot.impl.Util;
+
+/**
+ * Graph structure to be laid out and drawn by Graphviz.
+ */
 public class Graph extends GraphElement {
+	public enum Type {
+		graph, digraph
+	}
+
 	public Graph() {
 		_name = null;
-		_type = GraphType.digraph;
+		_type = Type.digraph;
+		_strict = false;
 		_nodes = new ArrayList<Node>();
 		_edges = new ArrayList<Edge>();
 	}
@@ -23,13 +34,22 @@ public class Graph extends GraphElement {
 		return _name;
 	}
 	
-	public Graph setType(GraphType type) {
+	public Graph setType(Type type) {
 		_type = type;
 		return this;
 	}
 	
-	public GraphType getType() {
+	public Type getType() {
 		return _type;
+	}
+	
+	public Graph setStrict(boolean strict) {
+		_strict = strict;
+		return this;
+	}
+	
+	public boolean isStrict() {
+		return _strict;
 	}
 	
 	public Graph addNode(Node n) {
@@ -45,7 +65,13 @@ public class Graph extends GraphElement {
 	}
 	
 	public String toDot() {
-		String dot = _type.name();
+		String dot = "";
+		
+		if(isStrict()) {
+			dot = "strict ";
+		}
+		
+		dot = dot + _type.name();
 		
 		if(_name != null && _name.length() > 0) {
 			dot = dot + " " + _name;
@@ -81,7 +107,8 @@ public class Graph extends GraphElement {
 	}
 
 	private String _name;
-	private GraphType _type; 
+	private Type _type; 
 	private List<Node> _nodes;
 	private List<Edge> _edges;
+	private boolean _strict;
 } 

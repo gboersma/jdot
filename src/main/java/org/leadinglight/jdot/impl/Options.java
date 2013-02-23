@@ -1,15 +1,16 @@
-package org.leadinglight.jdot;
+package org.leadinglight.jdot.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * Manage options associated with a GraphElement. 
  */
 public class Options {
-	enum Key {
+	public enum Key {
 		color, label, shape
 	}
 	

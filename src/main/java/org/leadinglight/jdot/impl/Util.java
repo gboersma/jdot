@@ -1,4 +1,4 @@
-package org.leadinglight.jdot;
+package org.leadinglight.jdot.impl;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

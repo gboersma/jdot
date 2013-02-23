@@ -27,8 +27,7 @@ public class GraphTest {
 	}
 	
 	public Graph directedGraph() {
-		Graph g = new Graph();
-		g.setName("sample1").setType(GraphType.digraph);
+		Graph g = new Graph().setName("sample1").setType(Graph.Type.digraph);
 		Node n1 = new Node("1").setLabel("Node 1").setColor("green").setShape(Node.Shape.square);
 		Node n2 = new Node("2").setLabel("Node 2").setColor("purple").setShape(Node.Shape.circle);
 		Node n3 = new Node("3").setLabel("Node 3").setColor("blue").setShape(Node.Shape.triangle);
@@ -40,8 +39,7 @@ public class GraphTest {
 	}
 	
 	public Graph undirectedGraph() {
-		Graph g = new Graph();
-		g.setName("sample1").setType(GraphType.graph);
+		Graph g = new Graph().setName("sample1").setType(Graph.Type.graph).setStrict(true);
 		Node n1 = new Node("1").setLabel("Node 1").setColor("green").setShape(Node.Shape.square);
 		Node n2 = new Node("2").setLabel("Node 2").setColor("purple").setShape(Node.Shape.circle);
 		Node n3 = new Node("3").setLabel("Node 3").setColor("blue").setShape(Node.Shape.triangle);

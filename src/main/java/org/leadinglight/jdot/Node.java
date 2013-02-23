@@ -1,7 +1,10 @@
 package org.leadinglight.jdot;
 
+import org.leadinglight.jdot.impl.GraphElement;
+import org.leadinglight.jdot.impl.Options;
+
 public class Node extends GraphElement {
-	enum Shape {
+	public enum Shape {
 		box, polygon, ellipse, oval, 
 		circle, point, egg, triangle, 
 		plaintext, diamond, trapezium, parallelogram,

@@ -1,4 +1,5 @@
-package org.leadinglight.jdot;
+package org.leadinglight.jdot.impl;
+
 
 public abstract class GraphElement {
 	public GraphElement() {
