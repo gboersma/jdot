@@ -32,25 +32,32 @@ public class Edge extends GraphElement {
 		return dot;
 	}
 	
-	public void setGraph(Graph graph) {
+	public Edge setGraph(Graph graph) {
 		_graph = graph;
+		return this;
 	}
 	
 	public Graph getGraph() {
 		return _graph;
 	}
 	
-	public void setLabel(String label) {
+	public Edge setLabel(String label) {
 		getOptions().setOption(Options.Key.label, label);
+		return this;
 	}
 	
-	public void setColor(String color) {
+	/**
+	 * Set the color of the node.
+	 * @param color Name of the color as a string (http://www.graphviz.org/doc/info/colors.html).
+	 */
+	public Edge setColor(String color) {
+		// TODO Specify color as an enum. 
+		// Tricky because there are so many different ones that depend on different color schemes.
 		getOptions().setOption(Options.Key.color, color);
+		return this;
 	}
 	
 	private Node _start;
 	private Node _end;
 	private Graph _graph;
-	
-	// TODO Colors as enumerated type.
 }

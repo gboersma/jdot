@@ -14,30 +14,34 @@ public class Graph extends GraphElement {
 		_edges = new ArrayList<Edge>();
 	}
 	
-	public void setName(String name) {
+	public Graph setName(String name) {
 		_name = name;
+		return this;
 	}
 	
 	public String getName() {
 		return _name;
 	}
 	
-	public void setType(GraphType type) {
+	public Graph setType(GraphType type) {
 		_type = type;
+		return this;
 	}
 	
 	public GraphType getType() {
 		return _type;
 	}
 	
-	public void addNode(Node n) {
+	public Graph addNode(Node n) {
 		n.setGraph(this);
 		_nodes.add(n);
+		return this;
 	}
 	
-	public void addEdge(Edge e) {
+	public Graph addEdge(Edge e) {
 		e.setGraph(this);
 		_edges.add(e);
+		return this;
 	}
 	
 	public String toDot() {

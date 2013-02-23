@@ -1,6 +1,24 @@
 package org.leadinglight.jdot;
 
 public class Node extends GraphElement {
+	enum Shape {
+		box, polygon, ellipse, oval, 
+		circle, point, egg, triangle, 
+		plaintext, diamond, trapezium, parallelogram,
+		house, pentagon, hexagon, septagon,
+		octagon, doublecircle, doubleoctagon, tripleoctagon, 
+		invtriangle, invtrapezium, invhouse, Mdiamond,
+		Msquare, Mcircle, rect, rectangle,
+		square, none, note, tab,
+		folder, box3d, component, promoter,
+		cds, terminator, utr, primersite,
+		restrictionsite, fivepoverhang, threepoverhang, noverhang,
+		assembly, signature, insulator, ribosite,
+		rnastab, proteasesite, proteinstab, rpromoter,
+		rarrow, larrow, lpromoter,
+		record, Mrecord
+	}
+	
 	public Node(String name) {
 		_name = name;
 	}
@@ -19,28 +37,36 @@ public class Node extends GraphElement {
 		return dot;
 	}
 	
-	public void setGraph(Graph graph) {
+	public Node setGraph(Graph graph) {
 		_graph = graph;
+		return this;
 	}
 	
 	public Graph getGraph() {
 		return _graph;
 	}
 
-	public void setLabel(String label) {
+	public Node setLabel(String label) {
 		getOptions().setOption(Options.Key.label, label);
+		return this;
 	}
 	
-	public void setColor(String color) {
+	/**
+	 * Set the color of the node.
+	 * @param color Name of the color as a string (http://www.graphviz.org/doc/info/colors.html).
+	 */
+	public Node setColor(String color) {
+		// TODO Specify color as an enum. 
+		// Tricky because there are so many different ones that depend on different color schemes.
 		getOptions().setOption(Options.Key.color, color);
+		return this;
 	}
 	
-	public void setShape(String shape) {
+	public Node setShape(Shape shape) {
 		getOptions().setOption(Options.Key.shape, shape);
+		return this;
 	}
 
 	private String _name;
 	private Graph _graph;
-	
-	// TODO Options color and shape as enums.
 }
