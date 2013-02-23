@@ -58,9 +58,23 @@ public class Graph extends GraphElement {
 		return this;
 	}
 	
+	public Graph addNodes(Node ... nodes) {
+		for (Node n : nodes) {
+			addNode(n);
+		}
+		return this;
+	}
+
 	public Graph addEdge(Edge e) {
 		e.setGraph(this);
 		_edges.add(e);
+		return this;
+	}
+	
+	public Graph addEdges(Edge ... edges) {
+		for(Edge e: edges) {
+			addEdge(e);
+		}
 		return this;
 	}
 	

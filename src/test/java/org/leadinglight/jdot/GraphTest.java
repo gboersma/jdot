@@ -22,7 +22,7 @@ public class GraphTest {
 		Edge e1 = new Edge(n1, n2);
 		Edge e2 = new Edge(n1, n3);
 		Edge e3 = new Edge(n2, n3);
-		g.addNode(n1).addNode(n2).addNode(n3).addEdge(e1).addEdge(e2).addEdge(e3);
+		g.addNodes(n1, n2, n3).addEdges(e1, e2, e3);
 		return g;
 	}
 	
@@ -34,7 +34,7 @@ public class GraphTest {
 		Edge e1 = new Edge(n1, n2).setColor(Color.X11.red);
 		Edge e2 = new Edge(n1, n3).setLabel("This is an edge.").setColor(Color.X11.green);
 		Edge e3 = new Edge(n2, n3).setColor(Color.X11.yellow);
-		g.addNode(n1).addNode(n2).addNode(n3).addEdge(e1).addEdge(e2).addEdge(e3);
+		g.addNodes(n1, n2, n3).addEdges(e1, e2, e3);
 		return g;
 	}
 	
@@ -46,7 +46,7 @@ public class GraphTest {
 		Edge e1 = new Edge(n1, n2).setColor(Color.X11.red);
 		Edge e2 = new Edge(n1, n3).setLabel("This is an edge.").setColor(Color.X11.green);
 		Edge e3 = new Edge(n2, n3).setColor(Color.X11.yellow);
-		g.addNode(n1).addNode(n2).addNode(n3).addEdge(e1).addEdge(e2).addEdge(e3);
+		g.addNodes(n1, n2, n3).addEdges(e1, e2, e3);
 		return g;
 	}
 }
