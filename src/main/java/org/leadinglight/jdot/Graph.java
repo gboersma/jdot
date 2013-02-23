@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.leadinglight.jdot.impl.GraphElement;
+import org.leadinglight.jdot.impl.Options;
 import org.leadinglight.jdot.impl.Util;
 
 /**
@@ -16,9 +17,21 @@ public class Graph extends GraphElement {
 	public enum Type {
 		graph, digraph
 	}
+	
+	public enum Ordering {
+		in, out
+	}
 
 	public Graph() {
 		_name = null;
+		_type = Type.digraph;
+		_strict = false;
+		_nodes = new ArrayList<Node>();
+		_edges = new ArrayList<Edge>();
+	}
+	
+	public Graph(String name) {
+		_name = name;
 		_type = Type.digraph;
 		_strict = false;
 		_nodes = new ArrayList<Node>();
@@ -52,6 +65,16 @@ public class Graph extends GraphElement {
 		return _strict;
 	}
 	
+	public Graph setSize(String size) {
+		getOptions().setOption(Options.Key.size, size);
+		return this;
+	}
+	
+	public Graph setOrdering(Ordering ordering) {
+		getOptions().setOption(Options.Key.ordering, ordering);
+		return this;
+	}
+
 	public Graph addNode(Node n) {
 		n.setGraph(this);
 		_nodes.add(n);
@@ -63,6 +86,26 @@ public class Graph extends GraphElement {
 			addNode(n);
 		}
 		return this;
+	}
+	
+	public Node getNode(String name) {
+		return getNode(name, false);
+	}
+	
+	public Node getNode(String name, boolean create) {
+		for(Node n : _nodes) {
+			if(n.getName().equals(name)) {
+				return n;
+			}
+		}
+		
+		if(create) {
+			Node n = new Node(name);
+			this.addNode(n);
+			return n;
+		} else {
+			throw new RuntimeException("Node " + name + " not found.");
+		}
 	}
 
 	public Graph addEdge(Edge e) {
@@ -93,6 +136,10 @@ public class Graph extends GraphElement {
 		
 		dot = dot + " {\n";
 		
+		if(getOptions().hasOptions()) {
+			dot = dot + "graph " + getOptions().getOptionsAsString() + ";\n";
+		}
+		
 		for (Node n : _nodes) {
 			dot = dot + n.toDot();
 		}
@@ -121,7 +168,7 @@ public class Graph extends GraphElement {
 	}
 
 	private String _name;
-	private Type _type; 
+	private Type _type;
 	private List<Node> _nodes;
 	private List<Edge> _edges;
 	private boolean _strict;

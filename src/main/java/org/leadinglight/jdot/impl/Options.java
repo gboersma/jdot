@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class Options {
 	public enum Key {
-		color, label, shape
+		color, label, shape, style, size, ordering, fontsize, fontname, fontcolor, width, dir
 	}
 	
 	public Options() {
@@ -36,7 +36,7 @@ public class Options {
 		if(value != null) {
 			str = str + key.name() + "=";
 			if(value instanceof String) {
-				str = str + "\"" + value + "\"";
+				str = str + "\"" + Util.escape((String)value) + "\"";
 			} else {
 				str = str + value;
 			}

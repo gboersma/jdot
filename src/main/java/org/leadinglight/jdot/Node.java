@@ -22,8 +22,19 @@ public class Node extends GraphElement {
 		record, Mrecord
 	}
 	
+	/**
+	 * A Node without a name specified is a style node.
+	 */
+	public Node() {
+		_name = "node";
+	}
+	
 	public Node(String name) {
 		_name = name;
+	}
+	
+	public boolean isStyle() {
+		return _name.equals("node");
 	}
 	
 	public String getName() {
@@ -31,11 +42,15 @@ public class Node extends GraphElement {
 	}
 	
 	public String toDot() {
-		String dot = _name;
+		String dot = "";
+		
 		if(getOptions().hasOptions()) {
+			if (!isStyle()) {
+				dot = "\"" + _name + "\"";
+			} else {
+				dot = _name; 
+			}
 			dot = dot + " " + getOptions().getOptionsAsString() + ";\n";
-		} else {
-			dot = dot + ";\n";
 		}
 		return dot;
 	}
@@ -75,6 +90,41 @@ public class Node extends GraphElement {
 	
 	public Node setShape(Shape shape) {
 		getOptions().setOption(Options.Key.shape, shape);
+		return this;
+	}
+	
+	public Node setStyle(Style style) {
+		getOptions().setOption(Options.Key.style, style);
+		return this;
+	}
+	
+	public Node setFontSize(String fontsize) {
+		getOptions().setOption(Options.Key.fontsize, fontsize);
+		return this;
+	}
+	
+	public Node setFontName(String fontname) {
+		getOptions().setOption(Options.Key.fontname, fontname);
+		return this;
+	}
+
+	public Node setFontColor(String fontcolor) {
+		getOptions().setOption(Options.Key.fontcolor, fontcolor);
+		return this;
+	}
+
+	public Node setFontColor(Color.X11 fontcolor) {
+		getOptions().setOption(Options.Key.fontcolor, fontcolor);
+		return this;
+	}
+	
+	public Node setFontColor(Color.SVG fontcolor) {
+		getOptions().setOption(Options.Key.fontcolor, fontcolor);
+		return this;
+	}
+
+	public Node setWidth(String width) {
+		getOptions().setOption(Options.Key.width, width);
 		return this;
 	}
 
