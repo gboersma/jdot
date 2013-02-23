@@ -28,15 +28,15 @@ public class Node extends GraphElement {
 	}
 
 	public void setLabel(String label) {
-		getOptions().setOption("label", label);
+		getOptions().setOption(Options.Key.label, label);
 	}
 	
 	public void setColor(String color) {
-		getOptions().setOption("color", color);
+		getOptions().setOption(Options.Key.color, color);
 	}
 	
 	public void setShape(String shape) {
-		getOptions().setOption("shape", shape);
+		getOptions().setOption(Options.Key.shape, shape);
 	}
 
 	private String _name;

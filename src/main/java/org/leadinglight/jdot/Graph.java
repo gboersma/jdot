@@ -1,6 +1,5 @@
 package org.leadinglight.jdot;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,7 +9,7 @@ import java.util.List;
 public class Graph extends GraphElement {
 	public Graph() {
 		_name = null;
-		_type = GraphType.DIGRAPH;
+		_type = GraphType.digraph;
 		_nodes = new ArrayList<Node>();
 		_edges = new ArrayList<Edge>();
 	}
@@ -42,13 +41,7 @@ public class Graph extends GraphElement {
 	}
 	
 	public String toDot() {
-		String dot;
-
-		if(_type == GraphType.DIGRAPH) {
-			dot = "digraph";
-		} else {
-			dot = "graph";
-		}
+		String dot = _type.name();
 		
 		if(_name != null && _name.length() > 0) {
 			dot = dot + " " + _name;
@@ -87,8 +80,4 @@ public class Graph extends GraphElement {
 	private GraphType _type; 
 	private List<Node> _nodes;
 	private List<Edge> _edges;
-	
-	// TODO Different types of graphs.
-	// TODO Add reference to graph from Node, Edge.
-	// TODO Options for Graph, Node, Edge.
 } 

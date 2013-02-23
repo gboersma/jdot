@@ -17,7 +17,7 @@ public class Edge extends GraphElement {
 	public String toDot() {
 		String dot;
 
-		if(getGraph().getType() == GraphType.DIGRAPH) {
+		if(getGraph().getType() == GraphType.digraph) {
 			dot = _start.getName() + " -> " + _end.getName();
 		} else {
 			dot = _start.getName() + " -- " + _end.getName();
@@ -41,11 +41,11 @@ public class Edge extends GraphElement {
 	}
 	
 	public void setLabel(String label) {
-		getOptions().setOption("label", label);
+		getOptions().setOption(Options.Key.label, label);
 	}
 	
 	public void setColor(String color) {
-		getOptions().setOption("color", color);
+		getOptions().setOption(Options.Key.color, color);
 	}
 	
 	private Node _start;

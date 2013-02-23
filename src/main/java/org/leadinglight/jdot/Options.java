@@ -9,27 +9,31 @@ import java.util.Map;
  * Manage options associated with a GraphElement. 
  */
 public class Options {
+	enum Key {
+		color, label, shape
+	}
+	
 	public Options() {
-		_options = new HashMap<String, Object>();
+		_options = new HashMap<Key, Object>();
 	}
 	
-	public Object getOption(String name) {
-		return _options.get(name);
+	public Object getOption(Key key) {
+		return _options.get(key);
 	}
 	
-	public void setOption(String name, Object value) {
-		_options.put(name, value);
+	public void setOption(Key key, Object value) {
+		_options.put(key, value);
 	}
 	
 	public boolean hasOptions() {
 		return !_options.isEmpty();
 	}
 	
-	public String getOptionAsString(String name) {
+	public String getOptionAsString(Key key) {
 		String str = "";
-		Object value = getOption(name);
+		Object value = getOption(key);
 		if(value != null) {
-			str = str + name + "=";
+			str = str + key.name() + "=";
 			if(value instanceof String) {
 				str = str + "\"" + value + "\"";
 			} else {
@@ -41,7 +45,7 @@ public class Options {
 	
 	public String getOptionsAsString() {
 		List<String> l = new ArrayList<String>();
-		for(String key : _options.keySet()) {
+		for(Key key : _options.keySet()) {
 			l.add(getOptionAsString(key));
 		}
 		return Util.join(l);
@@ -55,7 +59,5 @@ public class Options {
 		}
 	}
 	
-	private Map<String, Object> _options;
-	
-	// TODO Store options as enums rather than strings for more efficient storage.
+	private Map<Key, Object> _options;
 }

@@ -35,7 +35,7 @@ public class GraphTest {
 		// TODO Support much nicer construction patterns.
 		Graph g = new Graph();
 		g.setName("sample1");
-		g.setType(GraphType.DIGRAPH);
+		g.setType(GraphType.digraph);
 		Node n1 = new Node("1");
 		n1.setLabel("Node 1");
 		n1.setColor("green");
@@ -68,7 +68,7 @@ public class GraphTest {
 		// TODO Support much nicer construction patterns.
 		Graph g = new Graph();
 		g.setName("sample1");
-		g.setType(GraphType.GRAPH);
+		g.setType(GraphType.graph);
 		Node n1 = new Node("1");
 		n1.setLabel("Node 1");
 		n1.setColor("green");
