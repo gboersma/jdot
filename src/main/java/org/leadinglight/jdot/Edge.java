@@ -54,8 +54,16 @@ public class Edge extends GraphElement {
 	 * @param color Name of the color as a string (http://www.graphviz.org/doc/info/colors.html).
 	 */
 	public Edge setColor(String color) {
-		// TODO Specify color as an enum. 
-		// Tricky because there are so many different ones that depend on different color schemes.
+		getOptions().setOption(Options.Key.color, color);
+		return this;
+	}
+	
+	public Edge setColor(Color.X11 color) {
+		getOptions().setOption(Options.Key.color, color);
+		return this;
+	}
+
+	public Edge setColor(Color.SVG color) {
 		getOptions().setOption(Options.Key.color, color);
 		return this;
 	}

@@ -5,13 +5,13 @@ public class GraphTest {
 		GraphTest gt = new GraphTest();
 		Graph g1 = gt.simpleDirectedGraph();
 		System.out.println("Simple directed graph:\n" + g1.toDot());
-//		g1.dot2svg();
+		g1.dot2svg();
 		Graph g2 = gt.directedGraph();
 		System.out.println("Directed graph:\n" + g2.toDot());
-//		g2.dot2svg();
+		g2.dot2svg();
 		Graph g3 = gt.undirectedGraph();
 		System.out.println("Undirected graph:\n" + g3.toDot());
-//		g3.dot2svg();
+		g3.dot2svg();
 	}
 	
 	public Graph simpleDirectedGraph() {
@@ -28,24 +28,24 @@ public class GraphTest {
 	
 	public Graph directedGraph() {
 		Graph g = new Graph().setName("sample1").setType(Graph.Type.digraph);
-		Node n1 = new Node("1").setLabel("Node 1").setColor("green").setShape(Node.Shape.square);
-		Node n2 = new Node("2").setLabel("Node 2").setColor("purple").setShape(Node.Shape.circle);
-		Node n3 = new Node("3").setLabel("Node 3").setColor("blue").setShape(Node.Shape.triangle);
-		Edge e1 = new Edge(n1, n2).setColor("red");
-		Edge e2 = new Edge(n1, n3).setLabel("This is an edge.").setColor("green");
-		Edge e3 = new Edge(n2, n3).setColor("yellow");
+		Node n1 = new Node("1").setLabel("Node 1").setColor(Color.X11.green).setShape(Node.Shape.square);
+		Node n2 = new Node("2").setLabel("Node 2").setColor(Color.X11.purple).setShape(Node.Shape.circle);
+		Node n3 = new Node("3").setLabel("Node 3").setColor(Color.X11.blue).setShape(Node.Shape.triangle);
+		Edge e1 = new Edge(n1, n2).setColor(Color.X11.red);
+		Edge e2 = new Edge(n1, n3).setLabel("This is an edge.").setColor(Color.X11.green);
+		Edge e3 = new Edge(n2, n3).setColor(Color.X11.yellow);
 		g.addNode(n1).addNode(n2).addNode(n3).addEdge(e1).addEdge(e2).addEdge(e3);
 		return g;
 	}
 	
 	public Graph undirectedGraph() {
 		Graph g = new Graph().setName("sample1").setType(Graph.Type.graph).setStrict(true);
-		Node n1 = new Node("1").setLabel("Node 1").setColor("green").setShape(Node.Shape.square);
-		Node n2 = new Node("2").setLabel("Node 2").setColor("purple").setShape(Node.Shape.circle);
-		Node n3 = new Node("3").setLabel("Node 3").setColor("blue").setShape(Node.Shape.triangle);
-		Edge e1 = new Edge(n1, n2).setColor("red");
-		Edge e2 = new Edge(n1, n3).setLabel("This is an edge.").setColor("green");
-		Edge e3 = new Edge(n2, n3).setColor("yellow");
+		Node n1 = new Node("1").setLabel("Node 1").setColor(Color.X11.green).setShape(Node.Shape.square);
+		Node n2 = new Node("2").setLabel("Node 2").setColor(Color.X11.purple).setShape(Node.Shape.circle);
+		Node n3 = new Node("3").setLabel("Node 3").setColor(Color.X11.blue).setShape(Node.Shape.triangle);
+		Edge e1 = new Edge(n1, n2).setColor(Color.X11.red);
+		Edge e2 = new Edge(n1, n3).setLabel("This is an edge.").setColor(Color.X11.green);
+		Edge e3 = new Edge(n2, n3).setColor(Color.X11.yellow);
 		g.addNode(n1).addNode(n2).addNode(n3).addEdge(e1).addEdge(e2).addEdge(e3);
 		return g;
 	}
