@@ -11,7 +11,8 @@ public class GraphTest {
 //		Graph g = gt.viewfile();
 //		Graph g = gt.grammar();
 //		Graph g = gt.pmpipe();
-		Graph g = gt.abstractGraph();
+//		Graph g = gt.abstractGraph();
+		Graph g = gt.alf();
 		System.out.println(g.toDot());
 		g.dot2svg();
 	}
@@ -41,7 +42,7 @@ public class GraphTest {
 	}
 	
 	public Graph undirectedGraph() {
-		Graph g = new Graph().setName("sample1").setType(Graph.Type.graph).setStrict(true);
+		Graph g = new Graph().setName("sample1").setType(Graph.Type.graph);
 		Node n1 = new Node("1").setLabel("Node 1").setColor(Color.X11.green).setShape(Node.Shape.square);
 		Node n2 = new Node("2").setLabel("Node 2").setColor(Color.X11.purple).setShape(Node.Shape.circle);
 		Node n3 = new Node("3").setLabel("Node 3").setColor(Color.X11.blue).setShape(Node.Shape.triangle);
@@ -57,7 +58,7 @@ public class GraphTest {
 	public Graph viewfile() {
 		Graph g = new Graph("Viewfile");
 		g.addNodes(
-				new Node().setStyle(Style.filled),
+				new Node().setStyle(Node.Style.filled),
 				new Node("atoi").setColor(Color.X11.green),
 				new Node("chkmalloc").setColor(Color.X11.green),
 				new Node("close").setColor(Color.X11.green),
@@ -332,6 +333,42 @@ public class GraphTest {
 				new Edge(g, "7", "T8"),
 				new Edge(g, "23", "T24"),
 				new Edge(g, "23", "T1"));
+		return g;
+	}
+	
+	public Graph alf() {
+		Graph g = new Graph("Alf").setSize("6,9");
+		g.addNode(new Node().setShape(Shape.record));
+		g.addNodes(
+				new Node("Decl").setLabel("\n\nDecl|{name|access|decl_flags|extern_c_linkage}"),
+				new Node("Nontype_decl").setLabel("Nontype_decl|{type}"),
+				new Node("Defined_decl").setLabel("Defined_decl|{linkage}"),
+				new Node("Data_decl").setLabel("Data_decl|{storage_class}"),
+				new Node("Function_decl").setLabel("Function_decl|{formals|defaults}"),
+				new Node("Data").setLabel("Data|{initializer}"),
+				new Node("Function").setLabel("Function|{body}"),
+				new Node("Constructor").setLabel("Constructor|{member_initializers}"));
+		g.addEdges(
+				new Edge(g, "Aggregate", "Type_decl"),
+				new Edge(g, "Class", "Aggregate"),
+				new Edge(g, "Union", "Aggregate"),
+				new Edge(g, "Data", "Data_decl"),
+				new Edge(g, "Data", "Defn"),
+				new Edge(g, "Data_decl", "Defined_decl"),
+				new Edge(g, "Data_member", "Nontype_decl"),
+				new Edge(g, "Defined_decl", "Nontype_decl"),
+				new Edge(g, "Defn", "Defined_decl"),
+				new Edge(g, "Enum", "Type_decl"),
+				new Edge(g, "Enumerator", "Nontype_decl"),
+				new Edge(g, "Function", "Defn"),
+				new Edge(g, "Function", "Function_decl"),
+				new Edge(g, "Constructor", "Function"),
+				new Edge(g, "Destructor", "Function"),
+				new Edge(g, "Function_decl", "Defined_decl"),
+				new Edge(g, "Nontype_decl", "Decl"),
+				new Edge(g, "Template_type_arg", "Type_decl"),
+				new Edge(g, "Type_decl", "Decl"),
+				new Edge(g, "Typedef", "Type_decl"));
 		return g;
 	}
 }

@@ -22,6 +22,10 @@ public class Node extends GraphElement {
 		record, Mrecord
 	}
 	
+	public enum Style {
+		filled, invis
+	}
+	
 	/**
 	 * A Node without a name specified is a style node.
 	 */
