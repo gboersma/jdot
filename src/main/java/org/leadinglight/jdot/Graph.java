@@ -18,15 +18,20 @@ public class Graph extends GraphElement {
 		graph, digraph
 	}
 	
-	public enum Ordering {
-		in, out
+	public enum Ratio {
+		fill, compress, expand, auto
+	}
+	
+	public enum Rankdir {
+		LR
 	}
 
 	public Graph() {
 		_name = null;
 		_type = Type.digraph;
 		_strict = false;
-		_nodes = new ArrayList<Node>();
+		_nodeLists = new ArrayList<NodeList>();
+		_nodeLists.add(new NodeList(this));
 		_edges = new ArrayList<Edge>();
 	}
 	
@@ -34,7 +39,8 @@ public class Graph extends GraphElement {
 		_name = name;
 		_type = Type.digraph;
 		_strict = false;
-		_nodes = new ArrayList<Node>();
+		_nodeLists = new ArrayList<NodeList>();
+		_nodeLists.add(new NodeList(this));
 		_edges = new ArrayList<Edge>();
 	}
 	
@@ -70,14 +76,46 @@ public class Graph extends GraphElement {
 		return this;
 	}
 	
-	public Graph setOrdering(Ordering ordering) {
-		getOptions().setOption(Options.Key.ordering, ordering);
+	public Graph setOrdering(NodeList.Ordering ordering) {
+		getNodeList().setOrdering(ordering);
+		return this;
+	}
+	
+	public Graph setPage(String page) {
+		getOptions().setOption(Options.Key.page, page);
+		return this;
+	}
+	
+	public Graph setRatio(double ratio) {
+		getOptions().setOption(Options.Key.ratio, ratio);
+		return this;
+	}
+	
+	public Graph setRatio(Ratio ratio) {
+		getOptions().setOption(Options.Key.ratio, ratio);
+		return this;
+	}
+	
+	public Graph setRankDir(Rankdir rankdir) {
+		getOptions().setOption(Options.Key.rankdir, rankdir);
+		return this;
+	}
+	
+	public NodeList getNodeList() {
+		return getNodeList(_nodeLists.size() - 1);
+	}
+	
+	public NodeList getNodeList(int index) {
+		return _nodeLists.get(index);
+	}
+	
+	public Graph createNodeList() {
+		_nodeLists.add(new NodeList(this));
 		return this;
 	}
 
 	public Graph addNode(Node n) {
-		n.setGraph(this);
-		_nodes.add(n);
+		getNodeList().addNode(n);
 		return this;
 	}
 	
@@ -93,15 +131,16 @@ public class Graph extends GraphElement {
 	}
 	
 	public Node getNode(String name, boolean create) {
-		for(Node n : _nodes) {
-			if(n.getName().equals(name)) {
+		for(NodeList nl : _nodeLists) {
+			Node n = nl.getNode(name);
+			if(n != null) {
 				return n;
 			}
 		}
 		
 		if(create) {
 			Node n = new Node(name);
-			this.addNode(n);
+			getNodeList().addNode(n);
 			return n;
 		} else {
 			throw new RuntimeException("Node " + name + " not found.");
@@ -139,9 +178,13 @@ public class Graph extends GraphElement {
 		if(getOptions().hasOptions()) {
 			dot = dot + "graph " + getOptions().getOptionsAsString() + ";\n";
 		}
-		
-		for (Node n : _nodes) {
-			dot = dot + n.toDot();
+
+		if(_nodeLists.size() > 1) {
+			for (NodeList nl : _nodeLists) {
+				dot = dot + "{\n" + nl.toDot() + "}\n";
+			}
+		} else {
+			dot = dot + getNodeList().toDot();
 		}
 		
 		for (Edge e: _edges) {
@@ -169,7 +212,7 @@ public class Graph extends GraphElement {
 
 	private String _name;
 	private Type _type;
-	private List<Node> _nodes;
+	private List<NodeList> _nodeLists;
 	private List<Edge> _edges;
 	private boolean _strict;
 } 

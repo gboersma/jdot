@@ -4,6 +4,7 @@ import org.leadinglight.jdot.Edge;
 import org.leadinglight.jdot.Graph;
 import org.leadinglight.jdot.Node;
 import org.leadinglight.jdot.Node.Shape;
+import org.leadinglight.jdot.NodeList;
 
 public class Grammar {
 	public static void main(String[] args) {
@@ -14,7 +15,7 @@ public class Grammar {
 
 	public static Graph g() {
 		Graph g = new Graph("L0").setSize("8,8")
-				.setOrdering(Graph.Ordering.out);
+				.setOrdering(NodeList.Ordering.out);
 		g.addNode(new Node().setShape(Shape.box));
 		g.addNodes(new Node("n0").setLabel("E"), new Node("n1").setLabel("T"),
 				new Node("n2").setLabel("F"),

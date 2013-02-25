@@ -48,14 +48,18 @@ public class Node extends GraphElement {
 	public String toDot() {
 		String dot = "";
 		
-		if(getOptions().hasOptions()) {
-			if (!isStyle()) {
-				dot = "\"" + _name + "\"";
-			} else {
-				dot = _name; 
-			}
-			dot = dot + " " + getOptions().getOptionsAsString() + ";\n";
+		if (!isStyle()) {
+			dot = "\"" + _name + "\"";
+		} else {
+			dot = _name; 
 		}
+		
+		if(getOptions().hasOptions()) {
+			dot = dot + " " + getOptions().getOptionsAsString() + ";\n";
+		} else {
+			dot = dot + ";\n";
+		}
+		
 		return dot;
 	}
 	
