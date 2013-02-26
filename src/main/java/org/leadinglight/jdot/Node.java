@@ -4,28 +4,6 @@ import org.leadinglight.jdot.impl.GraphElement;
 import org.leadinglight.jdot.impl.Options;
 
 public class Node extends GraphElement {
-	public enum Shape {
-		box, polygon, ellipse, oval, 
-		circle, point, egg, triangle, 
-		plaintext, diamond, trapezium, parallelogram,
-		house, pentagon, hexagon, septagon,
-		octagon, doublecircle, doubleoctagon, tripleoctagon, 
-		invtriangle, invtrapezium, invhouse, Mdiamond,
-		Msquare, Mcircle, rect, rectangle,
-		square, none, note, tab,
-		folder, box3d, component, promoter,
-		cds, terminator, utr, primersite,
-		restrictionsite, fivepoverhang, threepoverhang, noverhang,
-		assembly, signature, insulator, ribosite,
-		rnastab, proteasesite, proteinstab, rpromoter,
-		rarrow, larrow, lpromoter,
-		record, Mrecord
-	}
-	
-	public enum Style {
-		filled, invis
-	}
-	
 	/**
 	 * A Node without a name specified is a style node.
 	 */
@@ -71,7 +49,31 @@ public class Node extends GraphElement {
 	public Graph getGraph() {
 		return _graph;
 	}
-
+	
+	// Options
+	
+	public enum Shape {
+		box, polygon, ellipse, oval, 
+		circle, point, egg, triangle, 
+		plaintext, diamond, trapezium, parallelogram,
+		house, pentagon, hexagon, septagon,
+		octagon, doublecircle, doubleoctagon, tripleoctagon, 
+		invtriangle, invtrapezium, invhouse, Mdiamond,
+		Msquare, Mcircle, rect, rectangle,
+		square, none, note, tab,
+		folder, box3d, component, promoter,
+		cds, terminator, utr, primersite,
+		restrictionsite, fivepoverhang, threepoverhang, noverhang,
+		assembly, signature, insulator, ribosite,
+		rnastab, proteasesite, proteinstab, rpromoter,
+		rarrow, larrow, lpromoter,
+		record, Mrecord
+	}
+	
+	public enum Style {
+		filled, invis
+	}
+	
 	public Node setLabel(String label) {
 		getOptions().setOption(Options.Key.label, label);
 		return this;

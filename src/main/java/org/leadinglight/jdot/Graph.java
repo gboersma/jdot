@@ -14,26 +14,6 @@ import org.leadinglight.jdot.impl.Util;
  * Graph structure to be laid out and drawn by Graphviz.
  */
 public class Graph extends GraphElement {
-	public enum Type {
-		graph, digraph
-	}
-	
-	public enum Ratio {
-		fill, compress, expand, auto
-	}
-	
-	public enum Rankdir {
-		LR
-	}
-	
-	public enum Splines {
-		none, line, polyline, curved, ortho, spline;
-	}
-	
-	public enum Overlap {
-		scale, prism, voronoi, scalexy, compress, vpsc, True, False; 
-	}
-
 	public Graph() {
 		_name = null;
 		_type = Type.digraph;
@@ -54,15 +34,6 @@ public class Graph extends GraphElement {
 		_edgeLists.add(new EdgeList(this));
 	}
 	
-	public Graph setName(String name) {
-		_name = name;
-		return this;
-	}
-	
-	public String getName() {
-		return _name;
-	}
-	
 	public NodeList getNodeList() {
 		return getNodeList(_nodeLists.size() - 1);
 	}
@@ -71,9 +42,9 @@ public class Graph extends GraphElement {
 		return _nodeLists.get(index);
 	}
 	
-	public Graph createNodeList() {
+	public NodeList createNodeList() {
 		_nodeLists.add(new NodeList(this));
-		return this;
+		return getNodeList();
 	}
 
 	public Graph addNode(Node n) {
@@ -117,9 +88,9 @@ public class Graph extends GraphElement {
 		return _edgeLists.get(index);
 	}
 	
-	public Graph createEdgeList() {
+	public EdgeList createEdgeList() {
 		_edgeLists.add(new EdgeList(this));
-		return this;
+		return getEdgeList();
 	}
 
 	public Graph addEdge(Edge e) {
@@ -150,7 +121,7 @@ public class Graph extends GraphElement {
 		dot = dot + " {\n";
 		
 		if(getOptions().hasOptions()) {
-			dot = dot + "graph " + getOptions().getOptionsAsString() + ";\n";
+			dot = dot + "graph [" + getOptions().getOptionsAsString() + "];\n";
 		}
 
 		if(_nodeLists.size() > 1) {
@@ -190,6 +161,37 @@ public class Graph extends GraphElement {
 		}
 	}
 
+	// Options
+	
+	public enum Type {
+		graph, digraph
+	}
+	
+	public enum Ratio {
+		fill, compress, expand, auto
+	}
+	
+	public enum Rankdir {
+		LR
+	}
+	
+	public enum Splines {
+		none, line, polyline, curved, ortho, spline;
+	}
+	
+	public enum Overlap {
+		scale, prism, voronoi, scalexy, compress, vpsc, True, False; 
+	}
+
+	public Graph setName(String name) {
+		_name = name;
+		return this;
+	}
+	
+	public String getName() {
+		return _name;
+	}
+	
 	public Graph setType(Type type) {
 		_type = type;
 		return this;

@@ -6,14 +6,6 @@ import java.util.List;
 import org.leadinglight.jdot.impl.GraphElement;
 
 public class NodeList extends GraphElement {
-	public enum Rank {
-		same, min, source, max, sink
-	}
-
-	public enum Ordering {
-		in, out
-	}
-	
 	public NodeList(Graph graph) {
 		_graph = graph;
 		_nodes = new ArrayList<Node>();
@@ -41,16 +33,6 @@ public class NodeList extends GraphElement {
 		return null;
 	}
 	
-	public NodeList setRank(Rank rank) {
-		_rank = rank;
-		return this;
-	}
-	
-	public NodeList setOrdering(Ordering ordering) {
-		_ordering = ordering;
-		return this;
-	}
-	
 	public String toDot() {
 		String dot = "";
 		
@@ -70,6 +52,26 @@ public class NodeList extends GraphElement {
 			dot = dot + n.toDot();
 		}
 		return dot;
+	}
+	
+	// Options
+	
+	public enum Rank {
+		same, min, source, max, sink
+	}
+
+	public enum Ordering {
+		in, out
+	}
+	
+	public NodeList setRank(Rank rank) {
+		_rank = rank;
+		return this;
+	}
+	
+	public NodeList setOrdering(Ordering ordering) {
+		_ordering = ordering;
+		return this;
 	}
 	
 	private List<Node> _nodes;

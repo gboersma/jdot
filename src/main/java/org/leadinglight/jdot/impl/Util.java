@@ -20,8 +20,23 @@ public class Util {
 	 * Concatenate the strings in the list with the , separator. 
 	 */
 	public static String join(List<String> l) {
-		return Arrays.toString(l.toArray());
+		return join(l, ", ");
 	}
+	
+	public static String join(List<String> l, String sep)
+	{
+	  int k=l.size();
+	  if (k==0) {
+	    return null;
+	  }
+	  StringBuilder out=new StringBuilder();
+	  out.append(l.get(0));
+	  for (int x=1;x<k;++x) {
+	    out.append(sep).append(l.get(x));
+	  }
+	  return out.toString();
+	}
+	
 	
 	public static String escape(String str) {
 		return str.replace("\n", "\\n");

@@ -1,47 +1,53 @@
 package org.leadinglight.jdot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.leadinglight.jdot.impl.GraphElement;
 import org.leadinglight.jdot.impl.Options;
+import org.leadinglight.jdot.impl.Util;
 
 public class Edge extends GraphElement {
-	public enum Dir {
-		back, forward, both
-	}
-	
-	public enum ArrowType {
-		normal, inv, dot, invdot, odot, invodot, none, tee, empty, invempty, diamond, 
-		odiamond, ediamond, crow, box, obox, open, halfopen, vee
-	}
-	
 	/**
 	 * An Edge without a start or end is a style edge.
 	 */
 	public Edge() {
-		_start = null;
-		_end = null;
+		_startNode = null;
+		_endNodes = new ArrayList<Node>();
 	}
 	
-	public Edge(Node start, Node end) {
-		_start = start;
-		_end = end;
+	public Edge(Node startNode, Node endNode) {
+		_startNode = startNode;
+		_endNodes = new ArrayList<Node>();
+		_endNodes.add(endNode);
+	}
+	
+	public Edge(Node startNode, Node ... endNodes) {
+		_startNode = startNode;
+		_endNodes = new ArrayList<Node>();
+		for(Node n: endNodes) {
+			_endNodes.add(n);
+		}
 	}
 	
 	public Edge(Graph graph, String startName, String endName) {
 		_graph = graph;
-		_start = graph.getNode(startName, true);
-		_end = graph.getNode(endName, true);
+		_startNode = graph.getNode(startName, true);
+		_endNodes = new ArrayList<Node>();
+		_endNodes.add(graph.getNode(endName, true));
+	}
+	
+	public Edge(Graph graph, String startName, String ... endNames) {
+		_graph = graph;
+		_startNode = graph.getNode(startName, true);
+		_endNodes = new ArrayList<Node>();
+		for(String endName: endNames) {
+			_endNodes.add(graph.getNode(endName, true));
+		}
 	}
 	
 	public boolean isStyle() {
-		return _start == null && _end == null;
-	}
-	
-	public Node getStart() {
-		return _start;
-	}
-	
-	public Node getEnd() {
-		return _end;
+		return _startNode == null && _endNodes.size() == 0;
 	}
 	
 	public String toDot() {
@@ -50,17 +56,32 @@ public class Edge extends GraphElement {
 		if(isStyle()) {
 			dot = "edge";
 		} else {
-			if(getGraph().getType() == Graph.Type.digraph) {
-				dot = "\"" + _start.getName() + "\" -> \"" + _end.getName() + "\"";
+			String endNodes = "";
+			if(_endNodes.size() > 1) {
+				List<String> nl = new ArrayList<String>();
+				for(Node endNode: _endNodes) {
+					nl.add("\"" + endNode.getName() + "\""); 
+				}
+				endNodes = "{" + Util.join(nl, "; ") + ";}";
 			} else {
-				dot = "\"" + _start.getName() + "\" -- \"" + _end.getName() + "\"";
+				endNodes = "\"" + _endNodes.get(0).getName() + "\""; 
+			}
+			
+			if(getGraph().getType() == Graph.Type.digraph) {
+				dot = "\"" + _startNode.getName() + "\" -> " + endNodes;
+			} else {
+				dot = "\"" + _startNode.getName() + "\" -- " + endNodes;
 			}
 		}
 			
 		if(getOptions().hasOptions()) {
 			dot = dot + " " + getOptions().getOptionsAsString() + ";\n";
 		} else {
-			dot = dot + ";\n";
+			if(_endNodes.size() == 1) {
+				dot = dot + ";\n";
+			} else {
+				dot = dot + "\n";
+			}
 		}
 
 		return dot;
@@ -73,6 +94,17 @@ public class Edge extends GraphElement {
 	
 	public Graph getGraph() {
 		return _graph;
+	}
+	
+	// Options
+	
+	public enum Dir {
+		back, forward, both
+	}
+	
+	public enum ArrowType {
+		normal, inv, dot, invdot, odot, invodot, none, tee, empty, invempty, diamond, 
+		odiamond, ediamond, crow, box, obox, open, halfopen, vee
 	}
 	
 	public Edge setLabel(String label) {
@@ -164,7 +196,7 @@ public class Edge extends GraphElement {
 		return this;
 	}
 
-	private Node _start;
-	private Node _end;
+	private Node _startNode;
+	private List<Node> _endNodes;
 	private Graph _graph;
 }
