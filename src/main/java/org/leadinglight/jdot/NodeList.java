@@ -37,15 +37,15 @@ public class NodeList extends GraphElement {
 		String dot = "";
 		
 		if(_rank != null) {
-			dot = dot + "rank=" + _rank + ";\n";
+			dot = dot + "rank=" + _rank + "\n";
 		}
 
 		if(_ordering != null) {
-			dot = dot + "ordering=" + _ordering + ";\n";
+			dot = dot + "ordering=" + _ordering + "\n";
 		}
 
 		if(getOptions().hasOptions()) {
-			dot = getOptions().getOptionsAsString() + ";\n";
+			dot = getOptions().getOptionsAsString() + "\n";
 		}
 
 		for (Node n : _nodes) {

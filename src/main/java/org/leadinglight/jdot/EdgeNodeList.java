@@ -35,7 +35,7 @@ public class EdgeNodeList {
 			for(Node n: _nodes) {
 				l.add("\"" + n.getName() + "\"");
 			}
-			dot = dot + "{" + Util.join(l, "; ") + ";}";
+			dot = dot + "{" + Util.join(l, " ") + "}";
 		}
 		return dot;
 	}

@@ -28,7 +28,7 @@ public class EdgeList extends GraphElement {
 		String dot = "";
 		
 		if(getOptions().hasOptions()) {
-			dot = getOptions().getOptionsAsString() + ";\n";
+			dot = getOptions().getOptionsAsString() + "\n";
 		}
 
 		for (Edge e : _edges) {

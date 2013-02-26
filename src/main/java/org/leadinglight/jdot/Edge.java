@@ -83,13 +83,9 @@ public class Edge extends GraphElement {
 		}
 			
 		if(getOptions().hasOptions()) {
-			dot = dot + " " + getOptions().getOptionsAsString() + ";\n";
+			dot = dot + " " + getOptions().getOptionsAsString() + "\n";
 		} else {
-			if(_edgeNodeLists.get(_edgeNodeLists.size() - 1).size() == 1) {
-				dot = dot + ";\n";
-			} else {
-				dot = dot + "\n";
-			}
+			dot = dot + "\n";
 		}
 
 		return dot;

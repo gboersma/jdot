@@ -51,7 +51,7 @@ public class Options {
 		for(Key key : _options.keySet()) {
 			l.add(getOptionAsString(key));
 		}
-		return Util.join(l);
+		return Util.join(l, " ");
 	}
 	
 	public String toDot() {

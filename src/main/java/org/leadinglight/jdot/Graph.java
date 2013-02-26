@@ -121,7 +121,7 @@ public class Graph extends GraphElement {
 		dot = dot + " {\n";
 		
 		if(getOptions().hasOptions()) {
-			dot = dot + "graph [" + getOptions().getOptionsAsString() + "];\n";
+			dot = dot + "graph [" + getOptions().getOptionsAsString() + "]\n";
 		}
 
 		if(_nodeLists.size() > 1) {

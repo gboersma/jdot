@@ -33,9 +33,9 @@ public class Node extends GraphElement {
 		}
 		
 		if(getOptions().hasOptions()) {
-			dot = dot + " " + getOptions().getOptionsAsString() + ";\n";
+			dot = dot + " " + getOptions().getOptionsAsString() + "\n";
 		} else {
-			dot = dot + ";\n";
+			dot = dot + "\n";
 		}
 		
 		return dot;
