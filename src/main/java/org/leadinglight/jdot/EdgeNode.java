@@ -22,7 +22,7 @@ public class EdgeNode {
 	public String toDot() {
 		String dot = "\"" + _node.getName() + "\"";
 		if(_label != null) {
-			dot = dot + ":" + _label;
+			dot = dot + ":" + "\""+ _label + "\"";
 		}
 		return dot;
 	}
