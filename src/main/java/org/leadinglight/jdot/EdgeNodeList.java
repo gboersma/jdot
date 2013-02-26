@@ -6,39 +6,43 @@ import java.util.List;
 import org.leadinglight.jdot.impl.Util;
 
 public class EdgeNodeList {
-	public EdgeNodeList(Node ...nodes) {
-		_nodes = new ArrayList<Node>();
+	public EdgeNodeList(Node ... nodes) {
+		_edgeNodes = new ArrayList<EdgeNode>();
 		for(Node n: nodes) {
-			_nodes.add(n);
+			_edgeNodes.add(new EdgeNode(n));
 		}
 	}
 	
+	public List<EdgeNode> getNodes() {
+		return _edgeNodes;
+	}
+	
 	public EdgeNodeList addNode(Node node) {
-		_nodes.add(node);
+		return addNode(node, null);
+	}
+	
+	public EdgeNodeList addNode(Node node, String label) {
+		_edgeNodes.add(new EdgeNode(node, label));
 		return this;
 	}
 	
-	public List<Node> getNodes() {
-		return _nodes;
-	}
-	
 	public int size() {
-		return _nodes.size();
+		return _edgeNodes.size();
 	}
 	
 	public String toDot() {
 		String dot = "";
-		if (_nodes.size() == 1) {
-			dot = dot + "\"" + _nodes.get(0).getName() + "\"";
+		if (_edgeNodes.size() == 1) {
+			dot = dot + _edgeNodes.get(0).toDot();
 		} else {
 			List<String> l = new ArrayList<String>();
-			for(Node n: _nodes) {
-				l.add("\"" + n.getName() + "\"");
+			for(EdgeNode en: _edgeNodes) {
+				l.add(en.toDot());
 			}
 			dot = dot + "{" + Util.join(l, " ") + "}";
 		}
 		return dot;
 	}
 
-	List<Node> _nodes;
+	List<EdgeNode> _edgeNodes;
 }

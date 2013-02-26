@@ -1,11 +1,8 @@
 package org.leadinglight.jdot.samples;
 
-import org.leadinglight.jdot.Color;
 import org.leadinglight.jdot.Edge;
 import org.leadinglight.jdot.Graph;
-import org.leadinglight.jdot.Node;
 import org.leadinglight.jdot.SubGraph;
-import org.leadinglight.jdot.Node.Shape;
 
 public class Clust5 {
 	public static void main(String[] args) {

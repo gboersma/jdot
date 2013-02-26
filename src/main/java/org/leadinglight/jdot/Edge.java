@@ -3,7 +3,6 @@ package org.leadinglight.jdot;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.leadinglight.jdot.Node.Style;
 import org.leadinglight.jdot.impl.AbstractElement;
 import org.leadinglight.jdot.impl.AbstractGraph;
 import org.leadinglight.jdot.impl.Options;
@@ -35,12 +34,20 @@ public class Edge extends AbstractElement {
 	}
 	
 	public Edge addNode(Node node) {
-		_edgeNodeLists.add(new EdgeNodeList(node));
+		return addNode(node, null);
+	}
+	
+	public Edge addNode(Node node, String label) {
+		_edgeNodeLists.add(new EdgeNodeList().addNode(node, label));
 		return this;
 	}
 	
 	public Edge addNode(Graph graph, String name) {
-		_edgeNodeLists.add(new EdgeNodeList(graph.getNode(name, true)));
+		return this.addNode(graph, name, null);
+	}
+	
+	public Edge addNode(Graph graph, String name, String label) {
+		_edgeNodeLists.add(new EdgeNodeList().addNode(graph.getNode(name, true), label));
 		return this;
 	}
 	
@@ -61,7 +68,7 @@ public class Edge extends AbstractElement {
 		}
 		return this;
 	}
-
+	
 	public boolean isStyle() {
 		return _edgeNodeLists.size() == 0;
 	}

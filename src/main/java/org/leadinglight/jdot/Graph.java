@@ -3,10 +3,7 @@ package org.leadinglight.jdot;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.leadinglight.jdot.impl.AbstractElement;
 import org.leadinglight.jdot.impl.AbstractGraph;
 import org.leadinglight.jdot.impl.Options;
 import org.leadinglight.jdot.impl.Util;
