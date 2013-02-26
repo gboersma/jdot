@@ -14,8 +14,7 @@ public class Trapeziumlr {
 	}
 	
 	public static Graph g() {
-		Graph g = new Graph();
-		g.setSize("7,9.5").setPage("8,10.5").setRatio(Graph.Ratio.fill).setRankDir(Graph.Rankdir.LR);
+		Graph g = new Graph("test").setSize("7,9.5").setPage("8,10.5").setRatio(Graph.Ratio.fill).setRankDir(Graph.Rankdir.LR);
 		g.getNodeList().setRank(NodeList.Rank.same);
 		g.addNodes(
 				new Node().setShape(Shape.house),

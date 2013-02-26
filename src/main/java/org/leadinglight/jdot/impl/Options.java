@@ -12,7 +12,8 @@ import java.util.Map;
 public class Options {
 	public enum Key {
 		color, label, shape, style, size, fontsize, fontname, fontcolor, width, dir, page, ratio,
-		rankdir
+		rankdir, ranksep, splines, overlap, labeldistance, samehead, sametail, arrowhead, arrowtail,
+		taillabel, headlabel;
 	}
 	
 	public Options() {

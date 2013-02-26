@@ -8,6 +8,11 @@ public class Edge extends GraphElement {
 		back, forward, both
 	}
 	
+	public enum ArrowType {
+		normal, inv, dot, invdot, odot, invodot, none, tee, empty, invempty, diamond, 
+		odiamond, ediamond, crow, box, obox, open, halfopen, vee
+	}
+	
 	/**
 	 * An Edge without a start or end is a style edge.
 	 */
@@ -121,6 +126,41 @@ public class Edge extends GraphElement {
 	
 	public Edge setDir(Dir dir) {
 		getOptions().setOption(Options.Key.dir, dir);
+		return this;
+	}
+	
+	public Edge setLabelDistance(double labeldistance) {
+		getOptions().setOption(Options.Key.labeldistance, labeldistance);
+		return this;
+	}
+	
+	public Edge setSameHead(String ahead) {
+		getOptions().setOption(Options.Key.samehead, ahead);
+		return this;
+	}
+	
+	public Edge setSameTail(String atail) {
+		getOptions().setOption(Options.Key.sametail, atail);
+		return this;
+	}
+
+	public Edge setArrowHead(ArrowType arrowType) {
+		getOptions().setOption(Options.Key.arrowhead, arrowType);
+		return this;
+	}
+
+	public Edge setArrowTail(ArrowType arrowType) {
+		getOptions().setOption(Options.Key.arrowtail, arrowType);
+		return this;
+	}
+	
+	public Edge setTailLabel(String label) {
+		getOptions().setOption(Options.Key.taillabel, label);
+		return this;
+	}
+
+	public Edge setHeadLabel(String label) {
+		getOptions().setOption(Options.Key.headlabel, label);
 		return this;
 	}
 
