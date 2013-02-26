@@ -33,7 +33,7 @@ public class Node extends GraphElement {
 		}
 		
 		if(getOptions().hasOptions()) {
-			dot = dot + " " + getOptions().getOptionsAsString() + "\n";
+			dot = dot + " [" + getOptions().getOptionsAsString() + "]\n";
 		} else {
 			dot = dot + "\n";
 		}
@@ -135,6 +135,21 @@ public class Node extends GraphElement {
 
 	public Node setWidth(String width) {
 		getOptions().setOption(Options.Key.width, width);
+		return this;
+	}
+	
+	public Node setWidth(double width) {
+		getOptions().setOption(Options.Key.width, new Double(width));
+		return this;
+	}
+
+	public Node setHeight(String height) {
+		getOptions().setOption(Options.Key.height, height);
+		return this;
+	}
+	
+	public Node setHeight(double height) {
+		getOptions().setOption(Options.Key.height, new Double(height));
 		return this;
 	}
 

@@ -13,7 +13,7 @@ public class Options {
 	public enum Key {
 		color, label, shape, style, size, fontsize, fontname, fontcolor, width, dir, page, ratio,
 		rankdir, ranksep, splines, overlap, labeldistance, samehead, sametail, arrowhead, arrowtail,
-		taillabel, headlabel;
+		taillabel, headlabel, center, bgcolor, height;
 	}
 	
 	public Options() {

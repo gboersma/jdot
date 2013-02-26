@@ -83,7 +83,7 @@ public class Edge extends GraphElement {
 		}
 			
 		if(getOptions().hasOptions()) {
-			dot = dot + " " + getOptions().getOptionsAsString() + "\n";
+			dot = dot + " [" + getOptions().getOptionsAsString() + "]\n";
 		} else {
 			dot = dot + "\n";
 		}
@@ -103,7 +103,7 @@ public class Edge extends GraphElement {
 	// Options
 	
 	public enum Dir {
-		back, forward, both
+		back, forward, both, none
 	}
 	
 	public enum ArrowType {

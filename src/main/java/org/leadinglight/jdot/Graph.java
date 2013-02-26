@@ -46,6 +46,10 @@ public class Graph extends GraphElement {
 		_nodeLists.add(new NodeList(this));
 		return getNodeList();
 	}
+	
+	public NodeList addNodeList() {
+		return createNodeList();
+	}
 
 	public Graph addNode(Node n) {
 		getNodeList().addNode(n);
@@ -92,6 +96,10 @@ public class Graph extends GraphElement {
 		_edgeLists.add(new EdgeList(this));
 		return getEdgeList();
 	}
+	
+	public EdgeList addEdgeList() {
+		return createEdgeList();
+	}
 
 	public Graph addEdge(Edge e) {
 		getEdgeList().addEdge(e);
@@ -123,23 +131,29 @@ public class Graph extends GraphElement {
 		if(getOptions().hasOptions()) {
 			dot = dot + "graph [" + getOptions().getOptionsAsString() + "]\n";
 		}
-
+		
 		if(_nodeLists.size() > 1) {
 			for (NodeList nl : _nodeLists) {
-				dot = dot + "{\n" + nl.toDot() + "}\n";
+				if(nl.isStyle()) {
+					dot = dot + nl.toDot();
+				} else {
+					dot = dot + "{\n" + nl.toDot() + "}\n";
+				}
 			}
 		} else {
 			dot = dot + getNodeList().toDot();
 		}
 		
-		boolean first = true;
-		for (EdgeList el : _edgeLists) {
-			if(first) {
-				dot = dot + el.toDot() + "\n";
-			} else {
-				dot = dot + "{\n" + el.toDot() + "}\n";
+		if(_edgeLists.size() > 1) {
+			for (EdgeList el : _edgeLists) {
+				if(el.isStyle()) {
+					dot = dot + el.toDot();
+				} else {
+					dot = dot + "{\n" + el.toDot() + "}\n";
+				}
 			}
-			first = false;
+		} else {
+			dot = dot + getEdgeList().toDot() + "\n";
 		}
 
 		dot = dot + "}\n";
@@ -160,6 +174,12 @@ public class Graph extends GraphElement {
 			throw new RuntimeException(e);
 		}
 	}
+
+	private List<NodeList> _nodeLists;
+	private List<EdgeList> _edgeLists;
+	private String _name;
+	private Type _type;
+	private boolean _strict;
 
 	// Options
 	
@@ -282,10 +302,24 @@ public class Graph extends GraphElement {
 		getOptions().setOption(Options.Key.overlap, new Boolean(overlap));
 		return this;
 	}
+	
+	public Graph setCenter(boolean center) {
+		getOptions().setOption(Options.Key.center, new Boolean(center));
+		return this;
+	}
 
-	private String _name;
-	private Type _type;
-	private List<NodeList> _nodeLists;
-	private List<EdgeList> _edgeLists;
-	private boolean _strict;
+	public Graph setBgColor(String color) {
+		getOptions().setOption(Options.Key.bgcolor, color);
+		return this;
+	}
+
+	public Graph setBgColor(Color.X11 color) {
+		getOptions().setOption(Options.Key.bgcolor, color);
+		return this;
+	}
+	
+	public Graph setBgColor(Color.SVG color) {
+		getOptions().setOption(Options.Key.bgcolor, color);
+		return this;
+	}
 } 

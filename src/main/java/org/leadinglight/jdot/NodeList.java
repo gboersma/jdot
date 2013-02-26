@@ -33,6 +33,10 @@ public class NodeList extends GraphElement {
 		return null;
 	}
 	
+	public boolean isStyle() {
+		return _nodes.size() == 1 && _nodes.get(0).isStyle();
+	}
+	
 	public String toDot() {
 		String dot = "";
 		

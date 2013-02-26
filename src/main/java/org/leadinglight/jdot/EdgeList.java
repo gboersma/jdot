@@ -24,6 +24,10 @@ public class EdgeList extends GraphElement {
 		return this;
 	}
 	
+	public boolean isStyle() {
+		return _edges.size() == 1 && _edges.get(0).isStyle();
+	}
+	
 	public String toDot() {
 		String dot = "";
 		
