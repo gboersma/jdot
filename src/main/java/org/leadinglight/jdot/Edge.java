@@ -12,42 +12,56 @@ public class Edge extends GraphElement {
 	 * An Edge without a start or end is a style edge.
 	 */
 	public Edge() {
-		_startNode = null;
-		_endNodes = new ArrayList<Node>();
+		_edgeNodeLists = new ArrayList<EdgeNodeList>();
 	}
 	
-	public Edge(Node startNode, Node endNode) {
-		_startNode = startNode;
-		_endNodes = new ArrayList<Node>();
-		_endNodes.add(endNode);
-	}
-	
-	public Edge(Node startNode, Node ... endNodes) {
-		_startNode = startNode;
-		_endNodes = new ArrayList<Node>();
-		for(Node n: endNodes) {
-			_endNodes.add(n);
+	public Edge(Node n1, Node ... nodes) {
+		_edgeNodeLists = new ArrayList<EdgeNodeList>();
+		_edgeNodeLists.add(new EdgeNodeList(n1));
+		for(Node n: nodes) {
+			_edgeNodeLists.add(new EdgeNodeList(n));
 		}
 	}
 	
-	public Edge(Graph graph, String startName, String endName) {
+	public Edge(Graph graph, String name, String ... names) {
 		_graph = graph;
-		_startNode = graph.getNode(startName, true);
-		_endNodes = new ArrayList<Node>();
-		_endNodes.add(graph.getNode(endName, true));
-	}
-	
-	public Edge(Graph graph, String startName, String ... endNames) {
-		_graph = graph;
-		_startNode = graph.getNode(startName, true);
-		_endNodes = new ArrayList<Node>();
-		for(String endName: endNames) {
-			_endNodes.add(graph.getNode(endName, true));
+		_edgeNodeLists = new ArrayList<EdgeNodeList>();
+		_edgeNodeLists.add(new EdgeNodeList(graph.getNode(name, true)));
+		for(String n: names) {
+			_edgeNodeLists.add(new EdgeNodeList(graph.getNode(n, true)));
 		}
 	}
 	
+	public Edge addNode(Node node) {
+		_edgeNodeLists.add(new EdgeNodeList(node));
+		return this;
+	}
+	
+	public Edge addNode(Graph graph, String name) {
+		_edgeNodeLists.add(new EdgeNodeList(graph.getNode(name, true)));
+		return this;
+	}
+	
+	public Edge addNodes(Node ... nodes) {
+		EdgeNodeList enl = new EdgeNodeList();
+		_edgeNodeLists.add(enl);
+		for(Node n: nodes) {
+			enl.addNode(n);
+		}
+		return this;
+	}
+	
+	public Edge addNodes(Graph graph, String ... names) {
+		EdgeNodeList enl = new EdgeNodeList();
+		_edgeNodeLists.add(enl);
+		for(String name: names) {
+			enl.addNode(graph.getNode(name, true));
+		}
+		return this;
+	}
+
 	public boolean isStyle() {
-		return _startNode == null && _endNodes.size() == 0;
+		return _edgeNodeLists.size() == 0;
 	}
 	
 	public String toDot() {
@@ -56,28 +70,22 @@ public class Edge extends GraphElement {
 		if(isStyle()) {
 			dot = "edge";
 		} else {
-			String endNodes = "";
-			if(_endNodes.size() > 1) {
-				List<String> nl = new ArrayList<String>();
-				for(Node endNode: _endNodes) {
-					nl.add("\"" + endNode.getName() + "\""); 
-				}
-				endNodes = "{" + Util.join(nl, "; ") + ";}";
-			} else {
-				endNodes = "\"" + _endNodes.get(0).getName() + "\""; 
+			List<String> l = new ArrayList<String>();
+			for(EdgeNodeList enl: _edgeNodeLists) {
+				l.add(enl.toDot());
 			}
-			
+
 			if(getGraph().getType() == Graph.Type.digraph) {
-				dot = "\"" + _startNode.getName() + "\" -> " + endNodes;
+				dot = Util.join(l, " -> ");
 			} else {
-				dot = "\"" + _startNode.getName() + "\" -- " + endNodes;
+				dot = Util.join(l, " -- ");
 			}
 		}
 			
 		if(getOptions().hasOptions()) {
 			dot = dot + " " + getOptions().getOptionsAsString() + ";\n";
 		} else {
-			if(_endNodes.size() == 1) {
+			if(_edgeNodeLists.get(_edgeNodeLists.size() - 1).size() == 1) {
 				dot = dot + ";\n";
 			} else {
 				dot = dot + "\n";
@@ -196,7 +204,6 @@ public class Edge extends GraphElement {
 		return this;
 	}
 
-	private Node _startNode;
-	private List<Node> _endNodes;
+	private List<EdgeNodeList> _edgeNodeLists;
 	private Graph _graph;
 }

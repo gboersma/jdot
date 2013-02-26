@@ -54,8 +54,8 @@ public class World {
 				// Note: It is important for the edges to be constructed like this.
 				// I am not sure why they cannot be separated. If they are, it produces a different result.
 				// Perhaps something to do with the ranking?
-				new Edge(g, "2", "3", "16", "17", "T1", "18"),
-				new Edge(g, "10", "11", "14", "T1", "13", "12"),
+				new Edge(g, "2").addNodes(g, "3", "16", "17", "T1", "18"),
+				new Edge(g, "10").addNodes(g, "11", "14", "T1", "13", "12"),
 				new Edge(g, "31", "T1"),
 				new Edge(g, "31", "32"),
 				new Edge(g, "33", "T30"),
@@ -68,7 +68,7 @@ public class World {
 				new Edge(g, "18", "29"),
 				new Edge(g, "11", "4"),
 				new Edge(g, "14", "15"),
-				new Edge(g, "37", "39", "41", "38", "40"),				
+				new Edge(g, "37").addNodes(g, "39", "41", "38", "40"),				
 				new Edge(g, "13", "19"),
 				new Edge(g, "12", "29"),
 				new Edge(g, "43", "38"),
@@ -81,8 +81,8 @@ public class World {
 				new Edge(g, "38", "4"),
 				new Edge(g, "40", "19"),
 				new Edge(g, "4", "5"),
-				new Edge(g, "19", "21", "20", "28"),
-				new Edge(g, "5", "6", "T35", "23"),
+				new Edge(g, "19").addNodes(g, "21", "20", "28"),
+				new Edge(g, "5").addNodes(g, "6", "T35", "23"),
 				new Edge(g, "21", "22"),
 				new Edge(g, "20", "15"),
 				new Edge(g, "28", "29"),
