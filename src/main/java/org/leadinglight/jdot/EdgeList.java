@@ -3,10 +3,11 @@ package org.leadinglight.jdot;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.leadinglight.jdot.impl.GraphElement;
+import org.leadinglight.jdot.impl.AbstractElement;
+import org.leadinglight.jdot.impl.AbstractGraph;
 
-public class EdgeList extends GraphElement {
-	public EdgeList(Graph graph) {
+public class EdgeList extends AbstractElement {
+	public EdgeList(AbstractGraph graph) {
 		_graph = graph;
 		_edges = new ArrayList<Edge>();
 	}
@@ -43,5 +44,5 @@ public class EdgeList extends GraphElement {
 	}
 
 	private List<Edge> _edges;
-	private Graph _graph;
+	private AbstractGraph _graph;
 }

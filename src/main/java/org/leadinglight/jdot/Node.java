@@ -1,9 +1,10 @@
 package org.leadinglight.jdot;
 
-import org.leadinglight.jdot.impl.GraphElement;
+import org.leadinglight.jdot.impl.AbstractElement;
+import org.leadinglight.jdot.impl.AbstractGraph;
 import org.leadinglight.jdot.impl.Options;
 
-public class Node extends GraphElement {
+public class Node extends AbstractElement {
 	/**
 	 * A Node without a name specified is a style node.
 	 */
@@ -41,12 +42,12 @@ public class Node extends GraphElement {
 		return dot;
 	}
 	
-	public Node setGraph(Graph graph) {
+	public Node setGraph(AbstractGraph graph) {
 		_graph = graph;
 		return this;
 	}
 	
-	public Graph getGraph() {
+	public AbstractGraph getGraph() {
 		return _graph;
 	}
 	
@@ -71,7 +72,7 @@ public class Node extends GraphElement {
 	}
 	
 	public enum Style {
-		filled, invis
+		solid, dashed, dotted, bold, rounded, diagonals, filled, striped, wedged, invis
 	}
 	
 	public Node setLabel(String label) {
@@ -154,5 +155,5 @@ public class Node extends GraphElement {
 	}
 
 	private String _name;
-	private Graph _graph;
+	private AbstractGraph _graph;
 }

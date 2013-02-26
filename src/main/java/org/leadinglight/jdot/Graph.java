@@ -6,110 +6,49 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.leadinglight.jdot.impl.GraphElement;
+import org.leadinglight.jdot.impl.AbstractElement;
+import org.leadinglight.jdot.impl.AbstractGraph;
 import org.leadinglight.jdot.impl.Options;
 import org.leadinglight.jdot.impl.Util;
 
 /**
  * Graph structure to be laid out and drawn by Graphviz.
  */
-public class Graph extends GraphElement {
+public class Graph extends AbstractGraph {
 	public Graph() {
-		_name = null;
+		super();
 		_type = Type.digraph;
 		_strict = false;
-		_nodeLists = new ArrayList<NodeList>();
-		_nodeLists.add(new NodeList(this));
-		_edgeLists = new ArrayList<EdgeList>();
-		_edgeLists.add(new EdgeList(this));
 	}
 	
 	public Graph(String name) {
-		_name = name;
+		super(name);
 		_type = Type.digraph;
 		_strict = false;
-		_nodeLists = new ArrayList<NodeList>();
-		_nodeLists.add(new NodeList(this));
-		_edgeLists = new ArrayList<EdgeList>();
-		_edgeLists.add(new EdgeList(this));
 	}
 	
-	public NodeList getNodeList() {
-		return getNodeList(_nodeLists.size() - 1);
-	}
-	
-	public NodeList getNodeList(int index) {
-		return _nodeLists.get(index);
-	}
-	
-	public NodeList createNodeList() {
-		_nodeLists.add(new NodeList(this));
-		return getNodeList();
-	}
-	
-	public NodeList addNodeList() {
-		return createNodeList();
-	}
-
 	public Graph addNode(Node n) {
-		getNodeList().addNode(n);
+		super.addNode(n);
 		return this;
 	}
 	
 	public Graph addNodes(Node ... nodes) {
-		for (Node n : nodes) {
-			addNode(n);
-		}
+		super.addNodes(nodes);
 		return this;
 	}
 	
-	public Node getNode(String name) {
-		return getNode(name, false);
-	}
-	
-	public Node getNode(String name, boolean create) {
-		for(NodeList nl : _nodeLists) {
-			Node n = nl.getNode(name);
-			if(n != null) {
-				return n;
-			}
-		}
-		
-		if(create) {
-			Node n = new Node(name);
-			getNodeList().addNode(n);
-			return n;
-		} else {
-			throw new RuntimeException("Node " + name + " not found.");
-		}
-	}
-	
-	public EdgeList getEdgeList() {
-		return getEdgeList(_edgeLists.size() - 1);
-	}
-	
-	public EdgeList getEdgeList(int index) {
-		return _edgeLists.get(index);
-	}
-	
-	public EdgeList createEdgeList() {
-		_edgeLists.add(new EdgeList(this));
-		return getEdgeList();
-	}
-	
-	public EdgeList addEdgeList() {
-		return createEdgeList();
-	}
-
 	public Graph addEdge(Edge e) {
-		getEdgeList().addEdge(e);
+		super.addEdge(e);
 		return this;
 	}
 	
 	public Graph addEdges(Edge ... edges) {
-		for(Edge e: edges) {
-			addEdge(e);
-		}
+		super.addEdges(edges);
+		return this;
+	}
+
+	public Graph addSubGraph(SubGraph subGraph) {
+		super.addSubGraph(subGraph);
 		return this;
 	}
 	
@@ -122,41 +61,11 @@ public class Graph extends GraphElement {
 		
 		dot = dot + _type.name();
 		
-		if(_name != null && _name.length() > 0) {
-			dot = dot + " " + _name;
+		if(getName() != null && getName().length() > 0) {
+			dot = dot + " " + getName();
 		}
 		
-		dot = dot + " {\n";
-		
-		if(getOptions().hasOptions()) {
-			dot = dot + "graph [" + getOptions().getOptionsAsString() + "]\n";
-		}
-		
-		if(_nodeLists.size() > 1) {
-			for (NodeList nl : _nodeLists) {
-				if(nl.isStyle()) {
-					dot = dot + nl.toDot();
-				} else {
-					dot = dot + "{\n" + nl.toDot() + "}\n";
-				}
-			}
-		} else {
-			dot = dot + getNodeList().toDot();
-		}
-		
-		if(_edgeLists.size() > 1) {
-			for (EdgeList el : _edgeLists) {
-				if(el.isStyle()) {
-					dot = dot + el.toDot();
-				} else {
-					dot = dot + "{\n" + el.toDot() + "}\n";
-				}
-			}
-		} else {
-			dot = dot + getEdgeList().toDot() + "\n";
-		}
-
-		dot = dot + "}\n";
+		dot = dot + super.toDot();
 		return dot;
 	}
 	
@@ -175,9 +84,6 @@ public class Graph extends GraphElement {
 		}
 	}
 
-	private List<NodeList> _nodeLists;
-	private List<EdgeList> _edgeLists;
-	private String _name;
 	private Type _type;
 	private boolean _strict;
 
@@ -202,16 +108,12 @@ public class Graph extends GraphElement {
 	public enum Overlap {
 		scale, prism, voronoi, scalexy, compress, vpsc, True, False; 
 	}
-
+	
 	public Graph setName(String name) {
-		_name = name;
+		super.setName(name);
 		return this;
 	}
-	
-	public String getName() {
-		return _name;
-	}
-	
+
 	public Graph setType(Type type) {
 		_type = type;
 		return this;

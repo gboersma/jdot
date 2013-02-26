@@ -3,11 +3,13 @@ package org.leadinglight.jdot;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.leadinglight.jdot.impl.GraphElement;
+import org.leadinglight.jdot.Node.Style;
+import org.leadinglight.jdot.impl.AbstractElement;
+import org.leadinglight.jdot.impl.AbstractGraph;
 import org.leadinglight.jdot.impl.Options;
 import org.leadinglight.jdot.impl.Util;
 
-public class Edge extends GraphElement {
+public class Edge extends AbstractElement {
 	/**
 	 * An Edge without a start or end is a style edge.
 	 */
@@ -23,7 +25,7 @@ public class Edge extends GraphElement {
 		}
 	}
 	
-	public Edge(Graph graph, String name, String ... names) {
+	public Edge(AbstractGraph graph, String name, String ... names) {
 		_graph = graph;
 		_edgeNodeLists = new ArrayList<EdgeNodeList>();
 		_edgeNodeLists.add(new EdgeNodeList(graph.getNode(name, true)));
@@ -74,11 +76,11 @@ public class Edge extends GraphElement {
 			for(EdgeNodeList enl: _edgeNodeLists) {
 				l.add(enl.toDot());
 			}
-
-			if(getGraph().getType() == Graph.Type.digraph) {
-				dot = Util.join(l, " -> ");
-			} else {
+			
+			if(getGraph() instanceof Graph && ((Graph)getGraph()).getType() == Graph.Type.graph) {
 				dot = Util.join(l, " -- ");
+			} else {
+				dot = Util.join(l, " -> ");
 			}
 		}
 			
@@ -91,14 +93,17 @@ public class Edge extends GraphElement {
 		return dot;
 	}
 	
-	public Edge setGraph(Graph graph) {
+	public Edge setGraph(AbstractGraph graph) {
 		_graph = graph;
 		return this;
 	}
 	
-	public Graph getGraph() {
+	public AbstractGraph getGraph() {
 		return _graph;
 	}
+	
+	private List<EdgeNodeList> _edgeNodeLists;
+	private AbstractGraph _graph;
 	
 	// Options
 	
@@ -109,6 +114,10 @@ public class Edge extends GraphElement {
 	public enum ArrowType {
 		normal, inv, dot, invdot, odot, invodot, none, tee, empty, invempty, diamond, 
 		odiamond, ediamond, crow, box, obox, open, halfopen, vee
+	}
+	
+	public enum Style {
+		solid, dashed, dotted, bold, invis, tapered
 	}
 	
 	public Edge setLabel(String label) {
@@ -199,7 +208,9 @@ public class Edge extends GraphElement {
 		getOptions().setOption(Options.Key.headlabel, label);
 		return this;
 	}
-
-	private List<EdgeNodeList> _edgeNodeLists;
-	private Graph _graph;
+	
+	public Edge setStyle(Style style) {
+		getOptions().setOption(Options.Key.style, style);
+		return this;
+	}
 }

@@ -1,8 +1,8 @@
 package org.leadinglight.jdot.impl;
 
 
-public abstract class GraphElement {
-	public GraphElement() {
+public abstract class AbstractElement {
+	public AbstractElement() {
 		_options = new Options();
 	}
 	

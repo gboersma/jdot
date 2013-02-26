@@ -3,10 +3,11 @@ package org.leadinglight.jdot;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.leadinglight.jdot.impl.GraphElement;
+import org.leadinglight.jdot.impl.AbstractElement;
+import org.leadinglight.jdot.impl.AbstractGraph;
 
-public class NodeList extends GraphElement {
-	public NodeList(Graph graph) {
+public class NodeList extends AbstractElement {
+	public NodeList(AbstractGraph graph) {
 		_graph = graph;
 		_nodes = new ArrayList<Node>();
 	}
@@ -79,7 +80,7 @@ public class NodeList extends GraphElement {
 	}
 	
 	private List<Node> _nodes;
-	private Graph _graph;
+	private AbstractGraph _graph;
 	private Rank _rank;
 	private Ordering _ordering;
 }
