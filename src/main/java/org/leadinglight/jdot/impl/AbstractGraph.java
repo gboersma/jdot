@@ -7,7 +7,6 @@ import org.leadinglight.jdot.Edge;
 import org.leadinglight.jdot.EdgeList;
 import org.leadinglight.jdot.Node;
 import org.leadinglight.jdot.NodeList;
-import org.leadinglight.jdot.SubGraph;
 
 public abstract class AbstractGraph extends AbstractElement {
 	public AbstractGraph() {
@@ -16,7 +15,7 @@ public abstract class AbstractGraph extends AbstractElement {
 		_nodeLists.add(new NodeList(this));
 		_edgeLists = new ArrayList<EdgeList>();
 		_edgeLists.add(new EdgeList(this));
-		_subGraphs = new ArrayList<SubGraph>();
+		_graphs = new ArrayList<AbstractGraph>();
 	}
 	
 	public AbstractGraph(String name) {
@@ -25,12 +24,7 @@ public abstract class AbstractGraph extends AbstractElement {
 		_nodeLists.add(new NodeList(this));
 		_edgeLists = new ArrayList<EdgeList>();
 		_edgeLists.add(new EdgeList(this));
-		_subGraphs = new ArrayList<SubGraph>();
-	}
-	
-	public AbstractGraph setName(String name) {
-		_name = name;
-		return this;
+		_graphs = new ArrayList<AbstractGraph>();
 	}
 	
 	public String getName() {
@@ -124,13 +118,13 @@ public abstract class AbstractGraph extends AbstractElement {
 		return this;
 	}
 	
-	public AbstractGraph addSubGraph(SubGraph subGraph) {
-		_subGraphs.add(subGraph);
+	public AbstractGraph addGraph(AbstractGraph graph) {
+		_graphs.add(graph);
 		return this;
 	}
 	
-	public List<SubGraph> getSubGraphs() {
-		return _subGraphs;
+	public List<AbstractGraph> getGraphs() {
+		return _graphs;
 	}
 	
 	public String toDot() {
@@ -140,8 +134,8 @@ public abstract class AbstractGraph extends AbstractElement {
 			dot = dot + "graph [" + getOptions().getOptionsAsString() + "]\n";
 		}
 
-		for(SubGraph sg: _subGraphs) {
-			dot = dot + sg.toDot();
+		for(AbstractGraph g: _graphs) {
+			dot = dot + g.toDot();
 		}
 		
 		if(getNodeLists().size() > 1) {
@@ -174,6 +168,6 @@ public abstract class AbstractGraph extends AbstractElement {
 	
 	private List<NodeList> _nodeLists;
 	private List<EdgeList> _edgeLists;
-	private List<SubGraph> _subGraphs;
+	private List<AbstractGraph> _graphs;
 	private String _name;
 }

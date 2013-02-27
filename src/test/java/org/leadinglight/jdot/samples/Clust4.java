@@ -1,10 +1,10 @@
 package org.leadinglight.jdot.samples;
 
+import org.leadinglight.jdot.ClusterGraph;
 import org.leadinglight.jdot.Color;
 import org.leadinglight.jdot.Edge;
 import org.leadinglight.jdot.Graph;
 import org.leadinglight.jdot.Node;
-import org.leadinglight.jdot.SubGraph;
 
 public class Clust4 {
 	public static void main(String[] args) {
@@ -15,10 +15,10 @@ public class Clust4 {
 
 	public static Graph g() {
 		Graph g = new Graph("G");
-		g.addSubGraph(new SubGraph("cluster_c0").setStyle(SubGraph.Style.filled).setColor(Color.X11.lightgrey).setLabel("process #1").addNode(
+		g.addClusterGraph(new ClusterGraph("_c0").setStyle(ClusterGraph.Style.filled).setColor(Color.X11.lightgrey).setLabel("process #1").addNode(
 				new Node().setStyle(Node.Style.filled).setColor(Color.X11.white)).addEdge(
 				new Edge(g, "a0", "a1", "a2", "a3")));
-		g.addSubGraph(new SubGraph("cluster_c1").setColor(Color.X11.blue).setLabel("process #2").addNode(
+		g.addClusterGraph(new ClusterGraph("_c1").setColor(Color.X11.blue).setLabel("process #2").addNode(
 				new Node().setStyle(Node.Style.filled)).addEdge(
 				new Edge(g, "b0", "b1", "b2", "b3")));
 		g.addNodes(

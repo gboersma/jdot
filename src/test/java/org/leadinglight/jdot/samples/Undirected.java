@@ -13,7 +13,7 @@ public class Undirected {
 	}
 	
 	public static Graph g() {
-		Graph g = new Graph().setName("sample1").setType(Graph.Type.graph);
+		Graph g = new Graph("sample1").setType(Graph.Type.graph);
 		Node n1 = new Node("1").setLabel("Node 1").setColor(Color.X11.green)
 				.setShape(Node.Shape.square);
 		Node n2 = new Node("2").setLabel("Node 2").setColor(Color.X11.purple)

@@ -45,10 +45,15 @@ public class Graph extends AbstractGraph {
 	}
 
 	public Graph addSubGraph(SubGraph subGraph) {
-		super.addSubGraph(subGraph);
+		super.addGraph(subGraph);
 		return this;
 	}
 	
+	public Graph addClusterGraph(ClusterGraph clusterGraph) {
+		super.addGraph(clusterGraph);
+		return this;
+	}
+
 	public String toDot() {
 		String dot = "";
 		
@@ -106,11 +111,6 @@ public class Graph extends AbstractGraph {
 		scale, prism, voronoi, scalexy, compress, vpsc, True, False; 
 	}
 	
-	public Graph setName(String name) {
-		super.setName(name);
-		return this;
-	}
-
 	public Graph setType(Type type) {
 		_type = type;
 		return this;
