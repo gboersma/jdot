@@ -1,9 +1,7 @@
 package org.leadinglight.jdot.samples;
 
-import org.leadinglight.jdot.ClusterGraph;
-import org.leadinglight.jdot.Color;
-import org.leadinglight.jdot.Edge;
-import org.leadinglight.jdot.Graph;
+import org.leadinglight.jdot.*;
+import org.leadinglight.jdot.enums.*;
 
 public class Clust {
 	public static void main(String[] args) {
@@ -14,11 +12,11 @@ public class Clust {
 
 	public static Graph g() {
 		Graph g = new Graph("G");
-		g.addClusterGraph(new ClusterGraph("_0").setLabel("hello world").setColor(Color.X11.hotpink).addEdges(
-				new Edge(g, "a", "b"), new Edge(g, "a", "c")));
-		g.addClusterGraph(new ClusterGraph("_1").setLabel("MSDOT").setColor(Color.X11.purple).setStyle(ClusterGraph.Style.dashed).addEdges(
-				new Edge(g, "x", "y"), new Edge(g, "x", "z"), new Edge(g, "y", "z"), new Edge(g, "y", "q")));
-		g.addEdges(new Edge(g, "top", "a"), new Edge(g, "top", "y"), new Edge(g, "y", "b"));
+		g.addClusterGraph(
+				new ClusterGraph("_0").setLabel("hello world").setColor(Color.X11.hotpink).addEdge("a", "b").addEdge("a", "c"));
+		g.addClusterGraph(
+				new ClusterGraph("_1").setLabel("MSDOT").setColor(Color.X11.purple).setStyle(Style.ClusterGraph.dashed).addEdge("x", "y").addEdge("x", "z").addEdge("y", "z").addEdge("y", "q"));
+		g.addEdges(new Edge("top", "a"), new Edge("top", "y"), new Edge("y", "b"));
 		return g;
 	}
 }

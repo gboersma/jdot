@@ -1,10 +1,7 @@
 package org.leadinglight.jdot.samples;
 
-import org.leadinglight.jdot.Color;
-import org.leadinglight.jdot.Edge;
-import org.leadinglight.jdot.Graph;
-import org.leadinglight.jdot.Node;
-import org.leadinglight.jdot.Node.Shape;
+import org.leadinglight.jdot.*;
+import org.leadinglight.jdot.enums.*;
 
 public class Pmpipe {
 	public static void main(String[] args) {
@@ -46,78 +43,78 @@ public class Pmpipe {
 				new Node("4151865284+0").setLabel("4151865284+0\\n/tmp/termcap")
 						.setShape(Shape.ellipse));
 		g.addEdges(
-				new Edge(g, "23296", "23310").setFontSize(14)
+				new Edge("23296", "23310").setFontSize(14)
 						.setFontName("Times-Roman")
 						.setFontColor(Color.X11.black)
 						.setColor(Color.X11.black),
-				new Edge(g, "23296", "23311").setFontSize(14)
+				new Edge("23296", "23311").setFontSize(14)
 						.setFontName("Times-Roman")
 						.setFontColor(Color.X11.black)
 						.setColor(Color.X11.black),
-				new Edge(g, "23311", "182948-1").setFontSize(14)
+				new Edge("23311", "182948-1").setFontSize(14)
 						.setFontName("Times-Roman")
 						.setFontColor(Color.X11.black)
-						.setColor(Color.X11.black).setDir(Edge.Dir.back),
-				new Edge(g, "23310", "182948-1").setFontSize(14)
+						.setColor(Color.X11.black).setDir(Dir.back),
+				new Edge("23310", "182948-1").setFontSize(14)
 						.setFontName("Times-Roman")
 						.setFontColor(Color.X11.black)
-						.setColor(Color.X11.black).setDir(Edge.Dir.forward),
-				new Edge(g, "23296", "23312").setFontSize(14)
-						.setFontName("Times-Roman")
-						.setFontColor(Color.X11.black)
-						.setColor(Color.X11.black),
-				new Edge(g, "23312", "182952-1").setFontSize(14)
-						.setFontName("Times-Roman")
-						.setFontColor(Color.X11.black)
-						.setColor(Color.X11.black).setDir(Edge.Dir.forward),
-				new Edge(g, "23312", "182950-1").setFontSize(14)
-						.setFontName("Times-Roman")
-						.setFontColor(Color.X11.black)
-						.setColor(Color.X11.black).setDir(Edge.Dir.back),
-				new Edge(g, "23296", "23313").setFontSize(14)
+						.setColor(Color.X11.black).setDir(Dir.forward),
+				new Edge("23296", "23312").setFontSize(14)
 						.setFontName("Times-Roman")
 						.setFontColor(Color.X11.black)
 						.setColor(Color.X11.black),
-				new Edge(g, "23313", "182954-1").setFontSize(14)
+				new Edge("23312", "182952-1").setFontSize(14)
 						.setFontName("Times-Roman")
 						.setFontColor(Color.X11.black)
-						.setColor(Color.X11.black).setDir(Edge.Dir.forward),
-				new Edge(g, "23311", "182950-1").setFontSize(14)
+						.setColor(Color.X11.black).setDir(Dir.forward),
+				new Edge("23312", "182950-1").setFontSize(14)
 						.setFontName("Times-Roman")
 						.setFontColor(Color.X11.black)
-						.setColor(Color.X11.black).setDir(Edge.Dir.forward),
-				new Edge(g, "23310", "79893+2568").setFontSize(14)
-						.setFontName("Times-Roman")
-						.setFontColor(Color.X11.black)
-						.setColor(Color.X11.black).setDir(Edge.Dir.back),
-				new Edge(g, "23296", "85+2560").setFontSize(14)
-						.setFontName("Times-Roman")
-						.setFontColor(Color.X11.black)
-						.setColor(Color.X11.black).setDir(Edge.Dir.both),
-				new Edge(g, "23296", "23314").setFontSize(14)
+						.setColor(Color.X11.black).setDir(Dir.back),
+				new Edge("23296", "23313").setFontSize(14)
 						.setFontName("Times-Roman")
 						.setFontColor(Color.X11.black)
 						.setColor(Color.X11.black),
-				new Edge(g, "23314", "85+2560").setFontSize(14)
+				new Edge("23313", "182954-1").setFontSize(14)
 						.setFontName("Times-Roman")
 						.setFontColor(Color.X11.black)
-						.setColor(Color.X11.black).setDir(Edge.Dir.both),
-				new Edge(g, "23314", "182954-1").setFontSize(14)
+						.setColor(Color.X11.black).setDir(Dir.forward),
+				new Edge("23311", "182950-1").setFontSize(14)
 						.setFontName("Times-Roman")
 						.setFontColor(Color.X11.black)
-						.setColor(Color.X11.black).setDir(Edge.Dir.back),
-				new Edge(g, "23296", "85+2560").setFontSize(14)
+						.setColor(Color.X11.black).setDir(Dir.forward),
+				new Edge("23310", "79893+2568").setFontSize(14)
 						.setFontName("Times-Roman")
 						.setFontColor(Color.X11.black)
-						.setColor(Color.X11.black).setDir(Edge.Dir.both),
-				new Edge(g, "23314", "4151865284+0").setFontSize(14)
+						.setColor(Color.X11.black).setDir(Dir.back),
+				new Edge("23296", "85+2560").setFontSize(14)
 						.setFontName("Times-Roman")
 						.setFontColor(Color.X11.black)
-						.setColor(Color.X11.black).setDir(Edge.Dir.forward),
-				new Edge(g, "23313", "182952-1").setFontSize(14)
+						.setColor(Color.X11.black).setDir(Dir.both),
+				new Edge("23296", "23314").setFontSize(14)
 						.setFontName("Times-Roman")
 						.setFontColor(Color.X11.black)
-						.setColor(Color.X11.black).setDir(Edge.Dir.back));
+						.setColor(Color.X11.black),
+				new Edge("23314", "85+2560").setFontSize(14)
+						.setFontName("Times-Roman")
+						.setFontColor(Color.X11.black)
+						.setColor(Color.X11.black).setDir(Dir.both),
+				new Edge("23314", "182954-1").setFontSize(14)
+						.setFontName("Times-Roman")
+						.setFontColor(Color.X11.black)
+						.setColor(Color.X11.black).setDir(Dir.back),
+				new Edge("23296", "85+2560").setFontSize(14)
+						.setFontName("Times-Roman")
+						.setFontColor(Color.X11.black)
+						.setColor(Color.X11.black).setDir(Dir.both),
+				new Edge("23314", "4151865284+0").setFontSize(14)
+						.setFontName("Times-Roman")
+						.setFontColor(Color.X11.black)
+						.setColor(Color.X11.black).setDir(Dir.forward),
+				new Edge("23313", "182952-1").setFontSize(14)
+						.setFontName("Times-Roman")
+						.setFontColor(Color.X11.black)
+						.setColor(Color.X11.black).setDir(Dir.back));
 		return g;
 	}
 }

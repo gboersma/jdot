@@ -1,9 +1,7 @@
 package org.leadinglight.jdot.samples;
 
-import org.leadinglight.jdot.Edge;
-import org.leadinglight.jdot.Graph;
-import org.leadinglight.jdot.Node;
-import org.leadinglight.jdot.Node.Shape;
+import org.leadinglight.jdot.*;
+import org.leadinglight.jdot.enums.*;
 
 public class Tree {
 	public static void main(String[] args) {
@@ -25,14 +23,14 @@ public class Tree {
 				new Node("node7").setLabel("<f0> |<f1> A|<f2> "),
 				new Node("node8").setLabel("<f0> |<f1> C|<f2> "));
 		g.addEdges(
-				new Edge().addNode(g, "node0", "f2").addNode(g, "node4", "f1"),
-				new Edge().addNode(g, "node0", "f0").addNode(g, "node1", "f1"),
-				new Edge().addNode(g, "node1", "f0").addNode(g, "node2", "f1"),
-				new Edge().addNode(g, "node1", "f2").addNode(g, "node3", "f1"),
-				new Edge().addNode(g, "node2", "f2").addNode(g, "node8", "f1"),
-				new Edge().addNode(g, "node2", "f0").addNode(g, "node7", "f1"),
-				new Edge().addNode(g, "node4", "f2").addNode(g, "node6", "f1"),
-				new Edge().addNode(g, "node4", "f0").addNode(g, "node5", "f1"));
+				new Edge().addNode("node0", "f2").addNode("node4", "f1"),
+				new Edge().addNode("node0", "f0").addNode("node1", "f1"),
+				new Edge().addNode("node1", "f0").addNode("node2", "f1"),
+				new Edge().addNode("node1", "f2").addNode("node3", "f1"),
+				new Edge().addNode("node2", "f2").addNode("node8", "f1"),
+				new Edge().addNode("node2", "f0").addNode("node7", "f1"),
+				new Edge().addNode("node4", "f2").addNode("node6", "f1"),
+				new Edge().addNode("node4", "f0").addNode("node5", "f1"));
 		return g;
 	}
 }

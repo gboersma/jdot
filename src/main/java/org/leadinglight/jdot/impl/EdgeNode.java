@@ -1,18 +1,18 @@
-package org.leadinglight.jdot;
+package org.leadinglight.jdot.impl;
 
 public class EdgeNode {
-	public EdgeNode(Node node) {
-		_node = node;
+	public EdgeNode(String name) {
+		_name = name;
 		_label = null;
 	}
 
-	public EdgeNode(Node node, String label) {
-		_node = node;
+	public EdgeNode(String name, String label) {
+		_name = name;
 		_label = label;
 	}
 	
-	public Node getNode() {
-		return _node;
+	public String getName() {
+		return _name;
 	}
 	
 	public String getLabel() {
@@ -20,13 +20,13 @@ public class EdgeNode {
 	}
 	
 	public String toDot() {
-		String dot = "\"" + _node.getName() + "\"";
+		String dot = "\"" + _name + "\"";
 		if(_label != null) {
 			dot = dot + ":" + "\""+ _label + "\"";
 		}
 		return dot;
 	}
 	
-	private Node _node;
+	private String _name;
 	private String _label;
 }

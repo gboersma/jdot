@@ -1,9 +1,7 @@
 package org.leadinglight.jdot.samples;
 
-import org.leadinglight.jdot.Edge;
-import org.leadinglight.jdot.Graph;
-import org.leadinglight.jdot.Node;
-import org.leadinglight.jdot.Node.Shape;
+import org.leadinglight.jdot.*;
+import org.leadinglight.jdot.enums.*;
 
 public class Record2 {
 	public static void main(String[] args) {
@@ -18,7 +16,7 @@ public class Record2 {
 				new Node("a").setLabel("<f0> foo | x | <f1> bar"),
 				new Node("b").setLabel("a | { <f0> foo | x | <f1> bar } | b"));
 		g.addEdge(
-				new Edge().addNode(g, "a", "f0").addNode(g, "b", "f1"));
+				new Edge().addNode("a", "f0").addNode("b", "f1"));
 		return g;
 	}
 }

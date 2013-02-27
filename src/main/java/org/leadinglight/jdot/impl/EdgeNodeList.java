@@ -1,15 +1,13 @@
-package org.leadinglight.jdot;
+package org.leadinglight.jdot.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.leadinglight.jdot.impl.Util;
-
 public class EdgeNodeList {
-	public EdgeNodeList(Node ... nodes) {
+	public EdgeNodeList(String ... names) {
 		_edgeNodes = new ArrayList<EdgeNode>();
-		for(Node n: nodes) {
-			_edgeNodes.add(new EdgeNode(n));
+		for(String name: names) {
+			_edgeNodes.add(new EdgeNode(name));
 		}
 	}
 	
@@ -17,12 +15,12 @@ public class EdgeNodeList {
 		return _edgeNodes;
 	}
 	
-	public EdgeNodeList addNode(Node node) {
-		return addNode(node, null);
+	public EdgeNodeList addNode(String name) {
+		return addNode(name, null);
 	}
 	
-	public EdgeNodeList addNode(Node node, String label) {
-		_edgeNodes.add(new EdgeNode(node, label));
+	public EdgeNodeList addNode(String name, String label) {
+		_edgeNodes.add(new EdgeNode(name, label));
 		return this;
 	}
 	

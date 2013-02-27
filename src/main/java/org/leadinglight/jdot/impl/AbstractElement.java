@@ -1,16 +1,15 @@
 package org.leadinglight.jdot.impl;
 
-
 public abstract class AbstractElement {
 	public AbstractElement() {
-		_options = new Options();
+		_attrs = new Attrs();
 	}
 	
-	public Options getOptions() {
-		return _options;
+	public Attrs getAttrs() {
+		return _attrs;
 	}
 	
 	public abstract String toDot();
 	
-	private Options _options;
+	private Attrs _attrs;
 }

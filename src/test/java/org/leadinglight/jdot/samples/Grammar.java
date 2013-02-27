@@ -1,10 +1,7 @@
 package org.leadinglight.jdot.samples;
 
-import org.leadinglight.jdot.Edge;
-import org.leadinglight.jdot.Graph;
-import org.leadinglight.jdot.Node;
-import org.leadinglight.jdot.Node.Shape;
-import org.leadinglight.jdot.NodeList;
+import org.leadinglight.jdot.*;
+import org.leadinglight.jdot.enums.*;
 
 public class Grammar {
 	public static void main(String[] args) {
@@ -14,8 +11,7 @@ public class Grammar {
 	}
 
 	public static Graph g() {
-		Graph g = new Graph("L0").setSize("8,8")
-				.setOrdering(NodeList.Ordering.out);
+		Graph g = new Graph("L0").setSize("8,8").setOrdering(Ordering.out);
 		g.addNode(new Node().setShape(Shape.box));
 		g.addNodes(new Node("n0").setLabel("E"), new Node("n1").setLabel("T"),
 				new Node("n2").setLabel("F"),
@@ -45,26 +41,21 @@ public class Grammar {
 				new Node("n39").setLabel("+"), new Node("n40").setLabel("T"),
 				new Node("n41").setLabel("F"),
 				new Node("n42").setLabel("IDENT : q "));
-		g.addEdges(new Edge(g, "n0", "n1"), new Edge(g, "n0", "n4"), new Edge(
-				g, "n0", "n5"), new Edge(g, "n0", "n39"), new Edge(g, "n0",
-				"n40"), new Edge(g, "n1", "n2"), new Edge(g, "n2", "n3"),
-				new Edge(g, "n5", "n6"), new Edge(g, "n5", "n16"), new Edge(g,
-						"n5", "n17"), new Edge(g, "n6", "n7"), new Edge(g,
-						"n6", "n8"), new Edge(g, "n6", "n15"), new Edge(g,
-						"n8", "n9"), new Edge(g, "n9", "n10"), new Edge(g,
-						"n9", "n12"), new Edge(g, "n9", "n13"), new Edge(g,
-						"n10", "n11"), new Edge(g, "n13", "n14"), new Edge(g,
-						"n17", "n18"), new Edge(g, "n17", "n19"), new Edge(g,
-						"n17", "n38"), new Edge(g, "n19", "n20"), new Edge(g,
-						"n19", "n26"), new Edge(g, "n19", "n27"), new Edge(g,
-						"n20", "n21"), new Edge(g, "n20", "n23"), new Edge(g,
-						"n20", "n24"), new Edge(g, "n21", "n22"), new Edge(g,
-						"n24", "n25"), new Edge(g, "n27", "n28"), new Edge(g,
-						"n28", "n29"), new Edge(g, "n28", "n30"), new Edge(g,
-						"n28", "n37"), new Edge(g, "n30", "n31"), new Edge(g,
-						"n31", "n32"), new Edge(g, "n31", "n34"), new Edge(g,
-						"n31", "n35"), new Edge(g, "n32", "n33"), new Edge(g,
-						"n35", "n36"), new Edge(g, "n40", "n41"), new Edge(g,
+		g.addEdges(new Edge("n0", "n1"), new Edge("n0", "n4"), new Edge("n0", "n5"), new Edge("n0", "n39"), new Edge("n0","n40"), 
+				new Edge("n1", "n2"), new Edge("n2", "n3"), new Edge("n5", "n6"), new Edge("n5", "n16"), new Edge("n5", "n17"), 
+				new Edge("n6", "n7"), new Edge("n6", "n8"), new Edge("n6", "n15"), new Edge("n8", "n9"), new Edge("n9", "n10"), 
+				new Edge("n9", "n12"), new Edge("n9", "n13"), new Edge("n10", "n11"), new Edge("n13", "n14"), new Edge(
+						"n17", "n18"), new Edge("n17", "n19"), new Edge(
+						"n17", "n38"), new Edge("n19", "n20"), new Edge(
+						"n19", "n26"), new Edge("n19", "n27"), new Edge(
+						"n20", "n21"), new Edge("n20", "n23"), new Edge(
+						"n20", "n24"), new Edge("n21", "n22"), new Edge(
+						"n24", "n25"), new Edge("n27", "n28"), new Edge(
+						"n28", "n29"), new Edge("n28", "n30"), new Edge(
+						"n28", "n37"), new Edge("n30", "n31"), new Edge(
+						"n31", "n32"), new Edge("n31", "n34"), new Edge(
+						"n31", "n35"), new Edge("n32", "n33"), new Edge(
+						"n35", "n36"), new Edge("n40", "n41"), new Edge(
 						"n41", "n42"));
 		return g;
 	}

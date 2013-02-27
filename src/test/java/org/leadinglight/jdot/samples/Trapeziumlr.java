@@ -1,10 +1,7 @@
 package org.leadinglight.jdot.samples;
 
-import org.leadinglight.jdot.Edge;
-import org.leadinglight.jdot.Graph;
-import org.leadinglight.jdot.Node;
-import org.leadinglight.jdot.Node.Shape;
-import org.leadinglight.jdot.NodeList;
+import org.leadinglight.jdot.*;
+import org.leadinglight.jdot.enums.*;
 
 public class Trapeziumlr {
 	public static void main(String[] args) {
@@ -14,9 +11,8 @@ public class Trapeziumlr {
 	}
 	
 	public static Graph g() {
-		Graph g = new Graph("test").setSize("7,9.5").setPage("8,10.5").setRatio(Graph.Ratio.fill).setRankDir(Graph.Rankdir.LR);
-		g.getNodeList().setRank(NodeList.Rank.same);
-		g.addNodes(
+		Graph g = new Graph("test").setSize("7,9.5").setPage("8,10.5").setRatio(Ratio.fill).setRankDir(Rankdir.LR);
+		g.addSubGraph(new SubGraph().setRank(Rank.same).addNodes(
 				new Node().setShape(Shape.house),
 				new Node("A"),
 				new Node("C"),
@@ -44,39 +40,38 @@ public class Trapeziumlr {
 				new Node("T"),
 				new Node("V"),
 				new Node("X"),
-				new Node("Z"));
-		g.createNodeList().addNodes(
+				new Node("Z")));
+		g.addSubGraph(new SubGraph().addNodes(
 				new Node().setShape(Shape.trapezium),
-				new Node("Trapezium"));
-		g.getNodeList().setRank(NodeList.Rank.same).setOrdering(NodeList.Ordering.out);
+				new Node("Trapezium")).setRank(Rank.same).setOrdering(Ordering.out));
 		g.addEdges(
-				new Edge(g, "Trapezium", "A"),
-				new Edge(g, "Trapezium", "B"),
-				new Edge(g, "Trapezium", "C"),
-				new Edge(g, "Trapezium", "D"),
-				new Edge(g, "Trapezium", "E"),
-				new Edge(g, "Trapezium", "F"),
-				new Edge(g, "Trapezium", "G"),
-				new Edge(g, "Trapezium", "H"),
-				new Edge(g, "Trapezium", "I"),
-				new Edge(g, "Trapezium", "J"),
-				new Edge(g, "Trapezium", "K"),
-				new Edge(g, "Trapezium", "L"),
-				new Edge(g, "Trapezium", "M"),
-				new Edge(g, "Trapezium", "N"),
-				new Edge(g, "Trapezium", "O"),
-				new Edge(g, "Trapezium", "P"),
-				new Edge(g, "Trapezium", "Q"),
-				new Edge(g, "Trapezium", "R"),
-				new Edge(g, "Trapezium", "S"),
-				new Edge(g, "Trapezium", "T"),
-				new Edge(g, "Trapezium", "U"),
-				new Edge(g, "Trapezium", "V"),
-				new Edge(g, "Trapezium", "W"),
-				new Edge(g, "Trapezium", "X"),
-				new Edge(g, "Trapezium", "Y"),
-				new Edge(g, "Trapezium", "Z"));
-		g.createNodeList().addNodes(
+				new Edge("Trapezium", "A"),
+				new Edge("Trapezium", "B"),
+				new Edge("Trapezium", "C"),
+				new Edge("Trapezium", "D"),
+				new Edge("Trapezium", "E"),
+				new Edge("Trapezium", "F"),
+				new Edge("Trapezium", "G"),
+				new Edge("Trapezium", "H"),
+				new Edge("Trapezium", "I"),
+				new Edge("Trapezium", "J"),
+				new Edge("Trapezium", "K"),
+				new Edge("Trapezium", "L"),
+				new Edge("Trapezium", "M"),
+				new Edge("Trapezium", "N"),
+				new Edge("Trapezium", "O"),
+				new Edge("Trapezium", "P"),
+				new Edge("Trapezium", "Q"),
+				new Edge("Trapezium", "R"),
+				new Edge("Trapezium", "S"),
+				new Edge("Trapezium", "T"),
+				new Edge("Trapezium", "U"),
+				new Edge("Trapezium", "V"),
+				new Edge("Trapezium", "W"),
+				new Edge("Trapezium", "X"),
+				new Edge("Trapezium", "Y"),
+				new Edge("Trapezium", "Z"));
+		g.addSubGraph(new SubGraph().addNodes(
 				new Node().setShape(Shape.parallelogram),
 				new Node("a"),
 				new Node("b"),
@@ -103,35 +98,34 @@ public class Trapeziumlr {
 				new Node("w"),
 				new Node("x"),
 				new Node("y"),
-				new Node("z"));
-		g.getNodeList().setRank(NodeList.Rank.same);
+				new Node("z")).setRank(Rank.same));
 		g.addEdges(
-				new Edge(g, "a", "Trapezium"),
-				new Edge(g, "b", "Trapezium"),
-				new Edge(g, "c", "Trapezium"),
-				new Edge(g, "d", "Trapezium"),
-				new Edge(g, "e", "Trapezium"),
-				new Edge(g, "f", "Trapezium"),
-				new Edge(g, "g", "Trapezium"),
-				new Edge(g, "h", "Trapezium"),
-				new Edge(g, "i", "Trapezium"),
-				new Edge(g, "j", "Trapezium"),
-				new Edge(g, "k", "Trapezium"),
-				new Edge(g, "l", "Trapezium"),
-				new Edge(g, "m", "Trapezium"),
-				new Edge(g, "n", "Trapezium"),
-				new Edge(g, "o", "Trapezium"),
-				new Edge(g, "p", "Trapezium"),
-				new Edge(g, "q", "Trapezium"),
-				new Edge(g, "r", "Trapezium"),
-				new Edge(g, "s", "Trapezium"),
-				new Edge(g, "t", "Trapezium"),
-				new Edge(g, "u", "Trapezium"),
-				new Edge(g, "v", "Trapezium"),
-				new Edge(g, "w", "Trapezium"),
-				new Edge(g, "x", "Trapezium"),
-				new Edge(g, "y", "Trapezium"),
-				new Edge(g, "z", "Trapezium"));
+				new Edge("a", "Trapezium"),
+				new Edge("b", "Trapezium"),
+				new Edge("c", "Trapezium"),
+				new Edge("d", "Trapezium"),
+				new Edge("e", "Trapezium"),
+				new Edge("f", "Trapezium"),
+				new Edge("g", "Trapezium"),
+				new Edge("h", "Trapezium"),
+				new Edge("i", "Trapezium"),
+				new Edge("j", "Trapezium"),
+				new Edge("k", "Trapezium"),
+				new Edge("l", "Trapezium"),
+				new Edge("m", "Trapezium"),
+				new Edge("n", "Trapezium"),
+				new Edge("o", "Trapezium"),
+				new Edge("p", "Trapezium"),
+				new Edge("q", "Trapezium"),
+				new Edge("r", "Trapezium"),
+				new Edge("s", "Trapezium"),
+				new Edge("t", "Trapezium"),
+				new Edge("u", "Trapezium"),
+				new Edge("v", "Trapezium"),
+				new Edge("w", "Trapezium"),
+				new Edge("x", "Trapezium"),
+				new Edge("y", "Trapezium"),
+				new Edge("z", "Trapezium"));
 		return g;
 	}
 }

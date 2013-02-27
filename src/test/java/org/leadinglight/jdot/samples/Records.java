@@ -1,9 +1,7 @@
 package org.leadinglight.jdot.samples;
 
-import org.leadinglight.jdot.Edge;
-import org.leadinglight.jdot.Graph;
-import org.leadinglight.jdot.Node;
-import org.leadinglight.jdot.Node.Shape;
+import org.leadinglight.jdot.*;
+import org.leadinglight.jdot.enums.*;
 
 public class Records {
 	public static void main(String[] args) {
@@ -13,7 +11,7 @@ public class Records {
 	}
 
 	public static Graph g() {
-		Graph g = new Graph("G").setRankDir(Graph.Rankdir.LR);
+		Graph g = new Graph("G").setRankDir(Rankdir.LR);
 		g.addNodes(
 				new Node().setShape(Shape.record),
 				new Node("a").setLabel("<bala> Graphs can\\lbe fun\\l|<f1> mid|<f2> right\\r"),
@@ -23,13 +21,13 @@ public class Records {
 				new Node("y").setLabel("<p1>   | y |<p2>   "),
 				new Node("z").setLabel("   | z |<p2>   "));
 		g.addEdges(
-				new Edge().addNode(g, "a", "bala").addNode(g, "b", "left"),
-				new Edge().addNode(g, "a", "f1").addNode(g, "d"),
-				new Edge().addNode(g, "a", "f2").addNode(g, "y", "p1"),
-				new Edge().addNode(g, "c", "p1").addNode(g, "d"),
-				new Edge().addNode(g, "b", "mid").addNode(g, "x", "p1"),
-				new Edge().addNode(g, "c", "p2").addNode(g, "y", "p2"),
-				new Edge().addNode(g, "b", "left").addNode(g, "z", "p2"));
+				new Edge().addNode("a", "bala").addNode("b", "left"),
+				new Edge().addNode("a", "f1").addNode("d"),
+				new Edge().addNode("a", "f2").addNode("y", "p1"),
+				new Edge().addNode("c", "p1").addNode("d"),
+				new Edge().addNode("b", "mid").addNode("x", "p1"),
+				new Edge().addNode("c", "p2").addNode("y", "p2"),
+				new Edge().addNode("b", "left").addNode("z", "p2"));
 		return g;
 	}
 }

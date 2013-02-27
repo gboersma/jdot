@@ -3,57 +3,29 @@ package org.leadinglight.jdot.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.leadinglight.jdot.Edge;
-import org.leadinglight.jdot.EdgeList;
-import org.leadinglight.jdot.Node;
-import org.leadinglight.jdot.NodeList;
+import org.leadinglight.jdot.*;
 
 public abstract class AbstractGraph extends AbstractElement {
 	public AbstractGraph() {
 		_name = null;
-		_nodeLists = new ArrayList<NodeList>();
-		_nodeLists.add(new NodeList(this));
-		_edgeLists = new ArrayList<EdgeList>();
-		_edgeLists.add(new EdgeList(this));
-		_graphs = new ArrayList<AbstractGraph>();
+		_elements = new ArrayList<AbstractElement>();
 	}
 	
 	public AbstractGraph(String name) {
 		_name = name;
-		_nodeLists = new ArrayList<NodeList>();
-		_nodeLists.add(new NodeList(this));
-		_edgeLists = new ArrayList<EdgeList>();
-		_edgeLists.add(new EdgeList(this));
-		_graphs = new ArrayList<AbstractGraph>();
+		_elements = new ArrayList<AbstractElement>();
 	}
 	
 	public String getName() {
 		return _name;
 	}
 	
-	public List<NodeList> getNodeLists() {
-		return _nodeLists;
-	}
-
-	public NodeList getNodeList() {
-		return getNodeList(_nodeLists.size() - 1);
+	public List<AbstractElement> getElements() {
+		return _elements;
 	}
 	
-	public NodeList getNodeList(int index) {
-		return _nodeLists.get(index);
-	}
-	
-	public NodeList createNodeList() {
-		_nodeLists.add(new NodeList(this));
-		return getNodeList();
-	}
-	
-	public NodeList addNodeList() {
-		return createNodeList();
-	}
-
 	public AbstractGraph addNode(Node n) {
-		getNodeList().addNode(n);
+		_elements.add(n);
 		return this;
 	}
 	
@@ -69,45 +41,49 @@ public abstract class AbstractGraph extends AbstractElement {
 	}
 	
 	public Node getNode(String name, boolean create) {
-		for(NodeList nl : _nodeLists) {
-			Node n = nl.getNode(name);
-			if(n != null) {
-				return n;
+		for(AbstractElement e : _elements) {
+			if(e instanceof Node && ((Node)e).getName().equals(name)) {
+				return (Node)e;
+			}
+			if(e instanceof AbstractGraph) {
+				Node n = ((AbstractGraph)e).getNodeOrNull(name);
+				if(n != null) {
+					return n;
+				}
 			}
 		}
 		
 		if(create) {
 			Node n = new Node(name);
-			getNodeList().addNode(n);
+			addNode(n);
 			return n;
 		} else {
 			throw new RuntimeException("Node " + name + " not found.");
 		}
 	}
 	
-	public List<EdgeList> getEdgeLists() {
-		return _edgeLists;
+	private Node getNodeOrNull(String name) {
+		for(AbstractElement e : _elements) {
+			if(e instanceof Node && ((Node)e).getName().equals(name)) {
+				return (Node)e;
+			}
+			if(e instanceof AbstractGraph) {
+				Node n = ((AbstractGraph)e).getNodeOrNull(name);
+				if(n != null) {
+					return n;
+				}
+			}
+		}
+		return null;
 	}
 	
-	public EdgeList getEdgeList() {
-		return getEdgeList(_edgeLists.size() - 1);
-	}
-	
-	public EdgeList getEdgeList(int index) {
-		return _edgeLists.get(index);
-	}
-	
-	public EdgeList createEdgeList() {
-		_edgeLists.add(new EdgeList(this));
-		return getEdgeList();
-	}
-	
-	public EdgeList addEdgeList() {
-		return createEdgeList();
-	}
-
 	public AbstractGraph addEdge(Edge e) {
-		getEdgeList().addEdge(e);
+		_elements.add(e.setGraph(this));
+		return this;
+	}
+	
+	public AbstractGraph addEdge(String name, String ... names) {
+		addEdge(new Edge(name, names).setGraph(this));
 		return this;
 	}
 	
@@ -119,55 +95,10 @@ public abstract class AbstractGraph extends AbstractElement {
 	}
 	
 	public AbstractGraph addGraph(AbstractGraph graph) {
-		_graphs.add(graph);
+		_elements.add(graph);
 		return this;
 	}
 	
-	public List<AbstractGraph> getGraphs() {
-		return _graphs;
-	}
-	
-	public String toDot() {
-		String dot = " {\n";
-		
-		if(getOptions().hasOptions()) {
-			dot = dot + "graph [" + getOptions().getOptionsAsString() + "]\n";
-		}
-
-		for(AbstractGraph g: _graphs) {
-			dot = dot + g.toDot();
-		}
-		
-		if(getNodeLists().size() > 1) {
-			for (NodeList nl : getNodeLists()) {
-				if(nl.isStyle()) {
-					dot = dot + nl.toDot();
-				} else {
-					dot = dot + "{\n" + nl.toDot() + "}\n";
-				}
-			}
-		} else {
-			dot = dot + getNodeList().toDot();
-		}
-		
-		if(getEdgeLists().size() > 1) {
-			for (EdgeList el : getEdgeLists()) {
-				if(el.isStyle()) {
-					dot = dot + el.toDot();
-				} else {
-					dot = dot + "{\n" + el.toDot() + "}\n";
-				}
-			}
-		} else {
-			dot = dot + getEdgeList().toDot();
-		}
-
-		dot = dot + "}\n";
-		return dot;
-	}
-	
-	private List<NodeList> _nodeLists;
-	private List<EdgeList> _edgeLists;
-	private List<AbstractGraph> _graphs;
+	private List<AbstractElement> _elements;
 	private String _name;
 }

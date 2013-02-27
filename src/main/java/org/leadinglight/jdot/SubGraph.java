@@ -1,6 +1,7 @@
 package org.leadinglight.jdot;
 
-import org.leadinglight.jdot.impl.AbstractGraph;
+import org.leadinglight.jdot.enums.*;
+import org.leadinglight.jdot.impl.*;
 
 public class SubGraph extends AbstractGraph {
 	public SubGraph() {
@@ -26,6 +27,11 @@ public class SubGraph extends AbstractGraph {
 		return this;
 	}
 	
+	public SubGraph addEdge(String name, String ... names) {
+		super.addEdge(name, names);
+		return this;
+	}
+	
 	public SubGraph addEdges(Edge ... edges) {
 		super.addEdges(edges);
 		return this;
@@ -42,13 +48,39 @@ public class SubGraph extends AbstractGraph {
 	}
 
 	public String toDot() {
-		String dot = "subgraph ";
+		String dot = "";
 		
 		if(getName() != null && getName().length() > 0) {
-			dot = dot + getName();
+			dot = dot + "subgraph " + getName() + " ";
 		}
 		
-		dot = dot + super.toDot();
+		dot = dot + "{\n";
+
+		if(getAttrs().has()) {
+			dot = dot + "graph [" + getAttrs().getAsString() + "]\n";
+		}
+
+		if(_rank != null) {
+			dot = dot + "rank=" + _rank + "\n";
+		}
+		for(AbstractElement e: getElements()) {
+			dot = dot + e.toDot(); 
+		}
+		dot = dot + "}\n";
 		return dot;
+	}
+	
+	// Attrs
+	
+	private Rank _rank = null;
+	
+	public SubGraph setRank(Rank rank) {
+		_rank = rank;
+		return this;
+	}
+
+	public SubGraph setOrdering(Ordering ordering) {
+		getAttrs().set(Attrs.Key.ordering, ordering);
+		return this;
 	}
 }

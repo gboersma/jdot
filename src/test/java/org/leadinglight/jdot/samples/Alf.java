@@ -1,9 +1,7 @@
 package org.leadinglight.jdot.samples;
 
-import org.leadinglight.jdot.Edge;
-import org.leadinglight.jdot.Graph;
-import org.leadinglight.jdot.Node;
-import org.leadinglight.jdot.Node.Shape;
+import org.leadinglight.jdot.*;
+import org.leadinglight.jdot.enums.*;
 
 public class Alf {
 	public static void main(String[] args) {
@@ -27,21 +25,21 @@ public class Alf {
 						"Function").setLabel("Function|{body}"), new Node(
 						"Constructor")
 						.setLabel("Constructor|{member_initializers}"));
-		g.addEdges(new Edge(g, "Aggregate", "Type_decl"), new Edge(g, "Class",
-				"Aggregate"), new Edge(g, "Union", "Aggregate"), new Edge(g,
-				"Data", "Data_decl"), new Edge(g, "Data", "Defn"), new Edge(g,
-				"Data_decl", "Defined_decl"), new Edge(g, "Data_member",
-				"Nontype_decl"), new Edge(g, "Defined_decl", "Nontype_decl"),
-				new Edge(g, "Defn", "Defined_decl"), new Edge(g, "Enum",
+		g.addEdges(new Edge("Aggregate", "Type_decl"), new Edge("Class",
+				"Aggregate"), new Edge("Union", "Aggregate"), new Edge(
+				"Data", "Data_decl"), new Edge("Data", "Defn"), new Edge(
+				"Data_decl", "Defined_decl"), new Edge("Data_member",
+				"Nontype_decl"), new Edge("Defined_decl", "Nontype_decl"),
+				new Edge("Defn", "Defined_decl"), new Edge("Enum",
 						"Type_decl"),
-				new Edge(g, "Enumerator", "Nontype_decl"), new Edge(g,
-						"Function", "Defn"), new Edge(g, "Function",
+				new Edge("Enumerator", "Nontype_decl"), new Edge(
+						"Function", "Defn"), new Edge("Function",
 						"Function_decl"),
-				new Edge(g, "Constructor", "Function"), new Edge(g,
-						"Destructor", "Function"), new Edge(g, "Function_decl",
-						"Defined_decl"), new Edge(g, "Nontype_decl", "Decl"),
-				new Edge(g, "Template_type_arg", "Type_decl"), new Edge(g,
-						"Type_decl", "Decl"), new Edge(g, "Typedef",
+				new Edge("Constructor", "Function"), new Edge(
+						"Destructor", "Function"), new Edge("Function_decl",
+						"Defined_decl"), new Edge("Nontype_decl", "Decl"),
+				new Edge("Template_type_arg", "Type_decl"), new Edge(
+						"Type_decl", "Decl"), new Edge("Typedef",
 						"Type_decl"));
 		return g;
 	}

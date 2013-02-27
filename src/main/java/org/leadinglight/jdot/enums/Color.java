@@ -1,4 +1,4 @@
-package org.leadinglight.jdot;
+package org.leadinglight.jdot.enums;
 
 public class Color {
 	public enum X11 {

@@ -1,8 +1,7 @@
 package org.leadinglight.jdot;
 
-import org.leadinglight.jdot.impl.AbstractElement;
-import org.leadinglight.jdot.impl.AbstractGraph;
-import org.leadinglight.jdot.impl.Options;
+import org.leadinglight.jdot.enums.*;
+import org.leadinglight.jdot.impl.*;
 
 public class Node extends AbstractElement {
 	/**
@@ -33,8 +32,8 @@ public class Node extends AbstractElement {
 			dot = _name; 
 		}
 		
-		if(getOptions().hasOptions()) {
-			dot = dot + " [" + getOptions().getOptionsAsString() + "]\n";
+		if(getAttrs().has()) {
+			dot = dot + " [" + getAttrs().getAsString() + "]\n";
 		} else {
 			dot = dot + "\n";
 		}
@@ -42,118 +41,87 @@ public class Node extends AbstractElement {
 		return dot;
 	}
 	
-	public Node setGraph(AbstractGraph graph) {
-		_graph = graph;
-		return this;
-	}
-	
-	public AbstractGraph getGraph() {
-		return _graph;
-	}
-	
 	// Options
 	
-	public enum Shape {
-		box, polygon, ellipse, oval, 
-		circle, point, egg, triangle, 
-		plaintext, diamond, trapezium, parallelogram,
-		house, pentagon, hexagon, septagon,
-		octagon, doublecircle, doubleoctagon, tripleoctagon, 
-		invtriangle, invtrapezium, invhouse, Mdiamond,
-		Msquare, Mcircle, rect, rectangle,
-		square, none, note, tab,
-		folder, box3d, component, promoter,
-		cds, terminator, utr, primersite,
-		restrictionsite, fivepoverhang, threepoverhang, noverhang,
-		assembly, signature, insulator, ribosite,
-		rnastab, proteasesite, proteinstab, rpromoter,
-		rarrow, larrow, lpromoter,
-		record, Mrecord
-	}
-	
-	public enum Style {
-		solid, dashed, dotted, bold, rounded, diagonals, filled, striped, wedged, invis
-	}
-	
 	public Node setLabel(String label) {
-		getOptions().setOption(Options.Key.label, label);
+		getAttrs().set(Attrs.Key.label, label);
 		return this;
 	}
 	
-	/**
-	 * Set the color of the node.
-	 * @param color Name of the color as a string (http://www.graphviz.org/doc/info/colors.html).
-	 */
 	public Node setColor(String color) {
-		getOptions().setOption(Options.Key.color, color);
+		getAttrs().set(Attrs.Key.color, color);
 		return this;
 	}
 	
 	public Node setColor(Color.X11 color) {
-		getOptions().setOption(Options.Key.color, color);
+		getAttrs().set(Attrs.Key.color, color);
 		return this;
 	}
 
 	public Node setColor(Color.SVG color) {
-		getOptions().setOption(Options.Key.color, color);
+		getAttrs().set(Attrs.Key.color, color);
 		return this;
 	}
 	
 	public Node setShape(Shape shape) {
-		getOptions().setOption(Options.Key.shape, shape);
+		getAttrs().set(Attrs.Key.shape, shape);
 		return this;
 	}
 	
-	public Node setStyle(Style style) {
-		getOptions().setOption(Options.Key.style, style);
+	public Node setStyle(Style.Node style) {
+		getAttrs().set(Attrs.Key.style, style);
 		return this;
 	}
 	
 	public Node setFontSize(double fontsize) {
-		getOptions().setOption(Options.Key.fontsize, new Double(fontsize));
+		getAttrs().set(Attrs.Key.fontsize, new Double(fontsize));
 		return this;
 	}
 	
 	public Node setFontName(String fontname) {
-		getOptions().setOption(Options.Key.fontname, fontname);
+		getAttrs().set(Attrs.Key.fontname, fontname);
 		return this;
 	}
 
 	public Node setFontColor(String fontcolor) {
-		getOptions().setOption(Options.Key.fontcolor, fontcolor);
+		getAttrs().set(Attrs.Key.fontcolor, fontcolor);
 		return this;
 	}
 
 	public Node setFontColor(Color.X11 fontcolor) {
-		getOptions().setOption(Options.Key.fontcolor, fontcolor);
+		getAttrs().set(Attrs.Key.fontcolor, fontcolor);
 		return this;
 	}
 	
 	public Node setFontColor(Color.SVG fontcolor) {
-		getOptions().setOption(Options.Key.fontcolor, fontcolor);
+		getAttrs().set(Attrs.Key.fontcolor, fontcolor);
 		return this;
 	}
 
 	public Node setWidth(String width) {
-		getOptions().setOption(Options.Key.width, width);
+		getAttrs().set(Attrs.Key.width, width);
 		return this;
 	}
 	
 	public Node setWidth(double width) {
-		getOptions().setOption(Options.Key.width, new Double(width));
+		getAttrs().set(Attrs.Key.width, new Double(width));
 		return this;
 	}
 
 	public Node setHeight(String height) {
-		getOptions().setOption(Options.Key.height, height);
+		getAttrs().set(Attrs.Key.height, height);
 		return this;
 	}
 	
 	public Node setHeight(double height) {
-		getOptions().setOption(Options.Key.height, new Double(height));
+		getAttrs().set(Attrs.Key.height, new Double(height));
+		return this;
+	}
+	
+	public Node setOrdering(Ordering ordering) {
+		getAttrs().set(Attrs.Key.ordering, ordering);
 		return this;
 	}
 
 	private String _name;
-	private AbstractGraph _graph;
 }

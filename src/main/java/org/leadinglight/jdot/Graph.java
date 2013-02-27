@@ -4,9 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.leadinglight.jdot.impl.AbstractGraph;
-import org.leadinglight.jdot.impl.Options;
-import org.leadinglight.jdot.impl.Util;
+import org.leadinglight.jdot.enums.*;
+import org.leadinglight.jdot.impl.*;
 
 /**
  * Graph structure to be laid out and drawn by Graphviz.
@@ -14,13 +13,13 @@ import org.leadinglight.jdot.impl.Util;
 public class Graph extends AbstractGraph {
 	public Graph() {
 		super();
-		_type = Type.digraph;
+		_type = GraphType.digraph;
 		_strict = false;
 	}
 	
 	public Graph(String name) {
 		super(name);
-		_type = Type.digraph;
+		_type = GraphType.digraph;
 		_strict = false;
 	}
 	
@@ -36,6 +35,11 @@ public class Graph extends AbstractGraph {
 	
 	public Graph addEdge(Edge e) {
 		super.addEdge(e);
+		return this;
+	}
+	
+	public Graph addEdge(String name, String ... names) {
+		super.addEdge(name, names);
 		return this;
 	}
 	
@@ -67,7 +71,16 @@ public class Graph extends AbstractGraph {
 			dot = dot + " " + getName();
 		}
 		
-		dot = dot + super.toDot();
+		dot = dot + " {\n";
+
+		if(getAttrs().has()) {
+			dot = dot + "graph [" + getAttrs().getAsString() + "]\n";
+		}
+		
+		for(AbstractElement e: getElements()) {
+			dot = dot + e.toDot(); 
+		}
+		dot = dot + "}\n";
 		return dot;
 	}
 	
@@ -86,37 +99,18 @@ public class Graph extends AbstractGraph {
 		}
 	}
 
-	private Type _type;
+	private GraphType _type;
 	private boolean _strict;
 
 	// Options
 	
-	public enum Type {
-		graph, digraph
-	}
 	
-	public enum Ratio {
-		fill, compress, expand, auto
-	}
-	
-	public enum Rankdir {
-		LR
-	}
-	
-	public enum Splines {
-		none, line, polyline, curved, ortho, spline;
-	}
-	
-	public enum Overlap {
-		scale, prism, voronoi, scalexy, compress, vpsc, True, False; 
-	}
-	
-	public Graph setType(Type type) {
+	public Graph setType(GraphType type) {
 		_type = type;
 		return this;
 	}
 	
-	public Type getType() {
+	public GraphType getType() {
 		return _type;
 	}
 	
@@ -130,32 +124,32 @@ public class Graph extends AbstractGraph {
 	}
 	
 	public Graph setSize(String size) {
-		getOptions().setOption(Options.Key.size, size);
+		getAttrs().set(Attrs.Key.size, size);
 		return this;
 	}
 	
-	public Graph setOrdering(NodeList.Ordering ordering) {
-		getNodeList().setOrdering(ordering);
+	public Graph setOrdering(Ordering ordering) {
+		getAttrs().set(Attrs.Key.ordering, ordering);
 		return this;
 	}
 	
 	public Graph setPage(String page) {
-		getOptions().setOption(Options.Key.page, page);
+		getAttrs().set(Attrs.Key.page, page);
 		return this;
 	}
 	
 	public Graph setRatio(double ratio) {
-		getOptions().setOption(Options.Key.ratio, ratio);
+		getAttrs().set(Attrs.Key.ratio, ratio);
 		return this;
 	}
 	
 	public Graph setRatio(Ratio ratio) {
-		getOptions().setOption(Options.Key.ratio, ratio);
+		getAttrs().set(Attrs.Key.ratio, ratio);
 		return this;
 	}
 	
 	public Graph setRankDir(Rankdir rankdir) {
-		getOptions().setOption(Options.Key.rankdir, rankdir);
+		getAttrs().set(Attrs.Key.rankdir, rankdir);
 		return this;
 	}
 	
@@ -170,60 +164,60 @@ public class Graph extends AbstractGraph {
 	public Graph setRankSep(double amount, boolean equally) {
 		if(equally) {
 			if(amount != Double.MAX_VALUE) {
-				getOptions().setOption(Options.Key.ranksep, Double.toString(amount) + " equally");
+				getAttrs().set(Attrs.Key.ranksep, Double.toString(amount) + " equally");
 			} else {
-				getOptions().setOption(Options.Key.ranksep, "equally");
+				getAttrs().set(Attrs.Key.ranksep, "equally");
 			}
 		} else {
 			if(amount != Double.MAX_VALUE) {
-				getOptions().setOption(Options.Key.ranksep, amount);
+				getAttrs().set(Attrs.Key.ranksep, amount);
 			}
 		}
 		return this;
 	}
 	
 	public Graph setSplines(Splines splines) {
-		getOptions().setOption(Options.Key.splines, splines);
+		getAttrs().set(Attrs.Key.splines, splines);
 		return this;
 	}
 	
 	public Graph setSplines(boolean splines) {
-		getOptions().setOption(Options.Key.splines, new Boolean(splines));
+		getAttrs().set(Attrs.Key.splines, new Boolean(splines));
 		return this;
 	}
 
 	public Graph setOverlap(Overlap overlap) {
-		getOptions().setOption(Options.Key.overlap, overlap);
+		getAttrs().set(Attrs.Key.overlap, overlap);
 		return this;
 	}
 	
 	public Graph setOverlap(boolean overlap) {
-		getOptions().setOption(Options.Key.overlap, new Boolean(overlap));
+		getAttrs().set(Attrs.Key.overlap, new Boolean(overlap));
 		return this;
 	}
 	
 	public Graph setCenter(boolean center) {
-		getOptions().setOption(Options.Key.center, new Boolean(center));
+		getAttrs().set(Attrs.Key.center, new Boolean(center));
 		return this;
 	}
 
 	public Graph setBgColor(String color) {
-		getOptions().setOption(Options.Key.bgcolor, color);
+		getAttrs().set(Attrs.Key.bgcolor, color);
 		return this;
 	}
 
 	public Graph setBgColor(Color.X11 color) {
-		getOptions().setOption(Options.Key.bgcolor, color);
+		getAttrs().set(Attrs.Key.bgcolor, color);
 		return this;
 	}
 	
 	public Graph setBgColor(Color.SVG color) {
-		getOptions().setOption(Options.Key.bgcolor, color);
+		getAttrs().set(Attrs.Key.bgcolor, color);
 		return this;
 	}
 	
 	public Graph setNodeSep(double nodesep) {
-		getOptions().setOption(Options.Key.nodesep, new Double(nodesep));
+		getAttrs().set(Attrs.Key.nodesep, new Double(nodesep));
 		return this;
 	}		
 } 

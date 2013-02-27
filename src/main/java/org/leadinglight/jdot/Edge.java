@@ -3,10 +3,8 @@ package org.leadinglight.jdot;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.leadinglight.jdot.impl.AbstractElement;
-import org.leadinglight.jdot.impl.AbstractGraph;
-import org.leadinglight.jdot.impl.Options;
-import org.leadinglight.jdot.impl.Util;
+import org.leadinglight.jdot.enums.*;
+import org.leadinglight.jdot.impl.*;
 
 public class Edge extends AbstractElement {
 	/**
@@ -16,55 +14,34 @@ public class Edge extends AbstractElement {
 		_edgeNodeLists = new ArrayList<EdgeNodeList>();
 	}
 	
-	public Edge(Node n1, Node ... nodes) {
+	public Edge(String name, String ... names) {
 		_edgeNodeLists = new ArrayList<EdgeNodeList>();
-		_edgeNodeLists.add(new EdgeNodeList(n1));
-		for(Node n: nodes) {
+		_edgeNodeLists.add(new EdgeNodeList(name));
+		for(String n: names) {
 			_edgeNodeLists.add(new EdgeNodeList(n));
 		}
+		_graph = null;
 	}
-	
-	public Edge(AbstractGraph graph, String name, String ... names) {
-		_graph = graph;
-		_edgeNodeLists = new ArrayList<EdgeNodeList>();
-		_edgeNodeLists.add(new EdgeNodeList(graph.getNode(name, true)));
-		for(String n: names) {
-			_edgeNodeLists.add(new EdgeNodeList(graph.getNode(n, true)));
-		}
-	}
-	
-	public Edge addNode(Node node) {
-		return addNode(node, null);
-	}
-	
-	public Edge addNode(Node node, String label) {
-		_edgeNodeLists.add(new EdgeNodeList().addNode(node, label));
+
+	public Edge setGraph(AbstractGraph g) {
+		_graph = g;
 		return this;
 	}
 	
-	public Edge addNode(Graph graph, String name) {
-		return this.addNode(graph, name, null);
+	public Edge addNode(String name) {
+		return addNode(name, null);
 	}
 	
-	public Edge addNode(Graph graph, String name, String label) {
-		_edgeNodeLists.add(new EdgeNodeList().addNode(graph.getNode(name, true), label));
+	public Edge addNode(String name, String label) {
+		_edgeNodeLists.add(new EdgeNodeList().addNode(name, label));
 		return this;
 	}
 	
-	public Edge addNodes(Node ... nodes) {
-		EdgeNodeList enl = new EdgeNodeList();
-		_edgeNodeLists.add(enl);
-		for(Node n: nodes) {
-			enl.addNode(n);
-		}
-		return this;
-	}
-	
-	public Edge addNodes(Graph graph, String ... names) {
+	public Edge addNodes(String ... names) {
 		EdgeNodeList enl = new EdgeNodeList();
 		_edgeNodeLists.add(enl);
 		for(String name: names) {
-			enl.addNode(graph.getNode(name, true));
+			enl.addNode(name);
 		}
 		return this;
 	}
@@ -84,15 +61,15 @@ public class Edge extends AbstractElement {
 				l.add(enl.toDot());
 			}
 			
-			if(getGraph() instanceof Graph && ((Graph)getGraph()).getType() == Graph.Type.graph) {
+			if(_graph instanceof Graph && ((Graph)_graph).getType() == GraphType.graph) {
 				dot = Util.join(l, " -- ");
 			} else {
 				dot = Util.join(l, " -> ");
 			}
 		}
 			
-		if(getOptions().hasOptions()) {
-			dot = dot + " [" + getOptions().getOptionsAsString() + "]\n";
+		if(getAttrs().has()) {
+			dot = dot + " [" + getAttrs().getAsString() + "]\n";
 		} else {
 			dot = dot + "\n";
 		}
@@ -100,35 +77,13 @@ public class Edge extends AbstractElement {
 		return dot;
 	}
 	
-	public Edge setGraph(AbstractGraph graph) {
-		_graph = graph;
-		return this;
-	}
-	
-	public AbstractGraph getGraph() {
-		return _graph;
-	}
-	
 	private List<EdgeNodeList> _edgeNodeLists;
 	private AbstractGraph _graph;
 	
-	// Options
-	
-	public enum Dir {
-		back, forward, both, none
-	}
-	
-	public enum ArrowType {
-		normal, inv, dot, invdot, odot, invodot, none, tee, empty, invempty, diamond, 
-		odiamond, ediamond, crow, box, obox, open, halfopen, vee
-	}
-	
-	public enum Style {
-		solid, dashed, dotted, bold, invis, tapered
-	}
+	// Attrs
 	
 	public Edge setLabel(String label) {
-		getOptions().setOption(Options.Key.label, label);
+		getAttrs().set(Attrs.Key.label, label);
 		return this;
 	}
 	
@@ -137,92 +92,92 @@ public class Edge extends AbstractElement {
 	 * @param color Name of the color as a string (http://www.graphviz.org/doc/info/colors.html).
 	 */
 	public Edge setColor(String color) {
-		getOptions().setOption(Options.Key.color, color);
+		getAttrs().set(Attrs.Key.color, color);
 		return this;
 	}
 	
 	public Edge setColor(Color.X11 color) {
-		getOptions().setOption(Options.Key.color, color);
+		getAttrs().set(Attrs.Key.color, color);
 		return this;
 	}
 
 	public Edge setColor(Color.SVG color) {
-		getOptions().setOption(Options.Key.color, color);
+		getAttrs().set(Attrs.Key.color, color);
 		return this;
 	}
 	
 	public Edge setFontSize(double fontsize) {
-		getOptions().setOption(Options.Key.fontsize, new Double(fontsize));
+		getAttrs().set(Attrs.Key.fontsize, new Double(fontsize));
 		return this;
 	}
 	
 	public Edge setFontName(String fontname) {
-		getOptions().setOption(Options.Key.fontname, fontname);
+		getAttrs().set(Attrs.Key.fontname, fontname);
 		return this;
 	}
 
 	public Edge setFontColor(String fontcolor) {
-		getOptions().setOption(Options.Key.fontcolor, fontcolor);
+		getAttrs().set(Attrs.Key.fontcolor, fontcolor);
 		return this;
 	}
 
 	public Edge setFontColor(Color.X11 fontcolor) {
-		getOptions().setOption(Options.Key.fontcolor, fontcolor);
+		getAttrs().set(Attrs.Key.fontcolor, fontcolor);
 		return this;
 	}
 	
 	public Edge setFontColor(Color.SVG fontcolor) {
-		getOptions().setOption(Options.Key.fontcolor, fontcolor);
+		getAttrs().set(Attrs.Key.fontcolor, fontcolor);
 		return this;
 	}
 	
 	public Edge setDir(Dir dir) {
-		getOptions().setOption(Options.Key.dir, dir);
+		getAttrs().set(Attrs.Key.dir, dir);
 		return this;
 	}
 	
 	public Edge setLabelDistance(double labeldistance) {
-		getOptions().setOption(Options.Key.labeldistance, labeldistance);
+		getAttrs().set(Attrs.Key.labeldistance, labeldistance);
 		return this;
 	}
 	
 	public Edge setSameHead(String ahead) {
-		getOptions().setOption(Options.Key.samehead, ahead);
+		getAttrs().set(Attrs.Key.samehead, ahead);
 		return this;
 	}
 	
 	public Edge setSameTail(String atail) {
-		getOptions().setOption(Options.Key.sametail, atail);
+		getAttrs().set(Attrs.Key.sametail, atail);
 		return this;
 	}
 
 	public Edge setArrowHead(ArrowType arrowType) {
-		getOptions().setOption(Options.Key.arrowhead, arrowType);
+		getAttrs().set(Attrs.Key.arrowhead, arrowType);
 		return this;
 	}
 
 	public Edge setArrowTail(ArrowType arrowType) {
-		getOptions().setOption(Options.Key.arrowtail, arrowType);
+		getAttrs().set(Attrs.Key.arrowtail, arrowType);
 		return this;
 	}
 	
 	public Edge setTailLabel(String label) {
-		getOptions().setOption(Options.Key.taillabel, label);
+		getAttrs().set(Attrs.Key.taillabel, label);
 		return this;
 	}
 
 	public Edge setHeadLabel(String label) {
-		getOptions().setOption(Options.Key.headlabel, label);
+		getAttrs().set(Attrs.Key.headlabel, label);
 		return this;
 	}
 	
-	public Edge setStyle(Style style) {
-		getOptions().setOption(Options.Key.style, style);
+	public Edge setStyle(Style.Edge style) {
+		getAttrs().set(Attrs.Key.style, style);
 		return this;
 	}
 	
 	public Edge setMinLen(int len) {
-		getOptions().setOption(Options.Key.minlen, new Integer(len));
+		getAttrs().set(Attrs.Key.minlen, new Integer(len));
 		return this;
 	}
 }

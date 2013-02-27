@@ -1,7 +1,7 @@
 package org.leadinglight.jdot;
 
-import org.leadinglight.jdot.impl.AbstractGraph;
-import org.leadinglight.jdot.impl.Options;
+import org.leadinglight.jdot.enums.*;
+import org.leadinglight.jdot.impl.*;
 
 public class ClusterGraph extends AbstractGraph {
 	public ClusterGraph() {
@@ -27,6 +27,11 @@ public class ClusterGraph extends AbstractGraph {
 		return this;
 	}
 	
+	public ClusterGraph addEdge(String name, String ... names) {
+		super.addEdge(name, names);
+		return this;
+	}
+	
 	public ClusterGraph addEdges(Edge ... edges) {
 		super.addEdges(edges);
 		return this;
@@ -43,48 +48,51 @@ public class ClusterGraph extends AbstractGraph {
 	}
 
 	public String toDot() {
-		String dot = "subgraph ";
+		String dot = "subgraph";
 		
 		if(getName() != null && getName().length() > 0) {
 			if(!getName().startsWith("cluster")) {
-				dot = dot + "cluster" + getName();
+				dot = dot + " cluster" + getName();
 			} else {
-				dot = dot + getName();
+				dot = dot + " " + getName();
 			}
 		}
 		
-		dot = dot + super.toDot();
+		dot = dot + " {\n";
+		if(getAttrs().has()) {
+			dot = dot + "graph [" + getAttrs().getAsString() + "]\n";
+		}
+		for(AbstractElement e: getElements()) {
+			dot = dot + e.toDot(); 
+		}
+		dot = dot + "}\n";
 		return dot;
 	}
 	
-	// Options
-	
-	public enum Style {
-		solid, dashed, dotted, bold, rounded, filled, striped, invis
-	}
+	// Attrs
 	
 	public ClusterGraph setLabel(String label) {
-		getOptions().setOption(Options.Key.label, label);
+		getAttrs().set(Attrs.Key.label, label);
 		return this;
 	}
 	
 	public ClusterGraph setColor(String color) {
-		getOptions().setOption(Options.Key.color, color);
+		getAttrs().set(Attrs.Key.color, color);
 		return this;
 	}
 	
 	public ClusterGraph setColor(Color.X11 color) {
-		getOptions().setOption(Options.Key.color, color);
+		getAttrs().set(Attrs.Key.color, color);
 		return this;
 	}
 
 	public ClusterGraph setColor(Color.SVG color) {
-		getOptions().setOption(Options.Key.color, color);
+		getAttrs().set(Attrs.Key.color, color);
 		return this;
 	}
 
-	public ClusterGraph setStyle(Style style) {
-		getOptions().setOption(Options.Key.style, style);
+	public ClusterGraph setStyle(Style.ClusterGraph style) {
+		getAttrs().set(Attrs.Key.style, style);
 		return this;
 	}
 }
