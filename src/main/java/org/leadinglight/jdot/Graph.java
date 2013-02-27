@@ -221,4 +221,9 @@ public class Graph extends AbstractGraph {
 		getOptions().setOption(Options.Key.bgcolor, color);
 		return this;
 	}
+	
+	public Graph setNodeSep(double nodesep) {
+		getOptions().setOption(Options.Key.nodesep, new Double(nodesep));
+		return this;
+	}		
 } 

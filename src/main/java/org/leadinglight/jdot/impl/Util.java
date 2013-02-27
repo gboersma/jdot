@@ -36,11 +36,6 @@ public class Util {
 	  return out.toString();
 	}
 	
-	
-	public static String escape(String str) {
-		return str.replace("\n", "\\n");
-	}
-	
 	public static String sh(String cmd) {
 		return sh(cmd, null);
 	}

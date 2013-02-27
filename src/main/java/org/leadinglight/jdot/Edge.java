@@ -151,8 +151,8 @@ public class Edge extends AbstractElement {
 		return this;
 	}
 	
-	public Edge setFontSize(String fontsize) {
-		getOptions().setOption(Options.Key.fontsize, fontsize);
+	public Edge setFontSize(double fontsize) {
+		getOptions().setOption(Options.Key.fontsize, new Double(fontsize));
 		return this;
 	}
 	
@@ -218,6 +218,11 @@ public class Edge extends AbstractElement {
 	
 	public Edge setStyle(Style style) {
 		getOptions().setOption(Options.Key.style, style);
+		return this;
+	}
+	
+	public Edge setMinLen(int len) {
+		getOptions().setOption(Options.Key.minlen, new Integer(len));
 		return this;
 	}
 }

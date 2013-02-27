@@ -32,6 +32,10 @@ public class EdgeList extends AbstractElement {
 	public String toDot() {
 		String dot = "";
 		
+		if(_rank != null) {
+			dot = dot + "rank=" + _rank + "\n";
+		}
+		
 		if(getOptions().hasOptions()) {
 			dot = getOptions().getOptionsAsString() + "\n";
 		}
@@ -45,4 +49,16 @@ public class EdgeList extends AbstractElement {
 
 	private List<Edge> _edges;
 	private AbstractGraph _graph;
+	private Rank _rank;
+
+	// Options
+	
+	public enum Rank {
+		same, min, source, max, sink
+	}
+	
+	public EdgeList setRank(Rank rank) {
+		_rank = rank;
+		return this;
+	}
 }

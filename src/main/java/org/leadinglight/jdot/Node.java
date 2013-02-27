@@ -109,8 +109,8 @@ public class Node extends AbstractElement {
 		return this;
 	}
 	
-	public Node setFontSize(String fontsize) {
-		getOptions().setOption(Options.Key.fontsize, fontsize);
+	public Node setFontSize(double fontsize) {
+		getOptions().setOption(Options.Key.fontsize, new Double(fontsize));
 		return this;
 	}
 	

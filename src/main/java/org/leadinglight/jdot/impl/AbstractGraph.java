@@ -165,7 +165,7 @@ public abstract class AbstractGraph extends AbstractElement {
 				}
 			}
 		} else {
-			dot = dot + getEdgeList().toDot() + "\n";
+			dot = dot + getEdgeList().toDot();
 		}
 
 		dot = dot + "}\n";

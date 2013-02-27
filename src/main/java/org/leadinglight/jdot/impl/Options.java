@@ -13,7 +13,7 @@ public class Options {
 	public enum Key {
 		color, label, shape, style, size, fontsize, fontname, fontcolor, width, dir, page, ratio,
 		rankdir, ranksep, splines, overlap, labeldistance, samehead, sametail, arrowhead, arrowtail,
-		taillabel, headlabel, center, bgcolor, height;
+		taillabel, headlabel, center, bgcolor, height, minlen, nodesep;
 	}
 	
 	public Options() {
@@ -38,7 +38,7 @@ public class Options {
 		if(value != null) {
 			str = str + key.name() + "=";
 			if(value instanceof String) {
-				str = str + "\"" + Util.escape((String)value) + "\"";
+				str = str + "\"" + (String)value + "\"";
 			} else {
 				str = str + value;
 			}
