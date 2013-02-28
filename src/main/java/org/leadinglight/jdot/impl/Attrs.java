@@ -11,9 +11,19 @@ import java.util.Map;
  */
 public class Attrs {
 	public enum Key {
-		color, label, shape, style, size, fontsize, fontname, fontcolor, width, dir, page, ratio,
-		rankdir, ranksep, splines, overlap, labeldistance, samehead, sametail, arrowhead, arrowtail,
-		taillabel, headlabel, center, bgcolor, height, minlen, nodesep, ordering;
+		Damping, K, URL, area, arrowhead, arrowsize, arrowtail, aspect, bb, bgcolor, center, charset, clusterrank, color, colorscheme, comment,
+		compound, concentrate, constraint, decorate, defaultdist, dim, dimen, dir, diredgeconstraints, distortion, dpi, edgeURL, edgehref,
+		edgetarget, edgetooltip, epsilon, esep, fillcolor, fixedsize, fontcolor, fontname, fontnames, fontpath, fontsize, forcelabels,
+		gradientangle, group, headURL, head_lp, headclip, headhref, headlabel, headport, headtarget, headtooltip, height, href,
+		id, image, imagepath, imagescale, label, labelURL, label_scheme, labelangle, labeldistance, labelfloat, labelfontcolor, labelfontname,
+		labelfontsize, labelhref, labeljust, labelloc, labeltarget, labeltooltip, landscape, layer, layerlistsep, layers, layerselect,
+		layersep, layout, len, levels, levelsgap, lhead, lheight, lp, ltail, lwidth, margin, maxiter, mclimit, mindist, minlen, mode, model,
+		mosek, nodesep, nojustify, normalize, nslimit, nslimit1, ordering, orientation, outputorder, overlap, overlap_scaling,
+		pack, packmode, pad, page, pagedir, pencolor, penwidth, peripheries, pin, pos, quadtree, quantum, rank, rankdir, ranksep,
+		ratio, rects, regular, remincross, repulsiveforce, resolution, root, rotate, rotation, samehead, sametail, samplepoints,
+		scale, searchsize, sep, shape, shapefile, showboxes, sides, size, skew, smoothing, sortv, splines, start, style, stylesheet,
+		tailURL, tail_lp, tailclip, tailhref, taillabel, tailport, tailtarget, tailtooltip, target, tooltip, truecolor, vertices, 
+		viewport, voro_margin, weight, width, xlabel, xlp, z
 	}
 	
 	public Attrs() {

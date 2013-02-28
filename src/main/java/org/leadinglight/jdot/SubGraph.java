@@ -74,13 +74,13 @@ public class SubGraph extends AbstractGraph {
 	
 	private Rank _rank = null;
 	
-	public SubGraph setRank(Rank rank) {
-		_rank = rank;
+	public SubGraph setOrdering(Ordering ordering) {
+		getAttrs().set(Attrs.Key.ordering, ordering);
 		return this;
 	}
 
-	public SubGraph setOrdering(Ordering ordering) {
-		getAttrs().set(Attrs.Key.ordering, ordering);
+	public SubGraph setRank(Rank rank) {
+		_rank = rank;
 		return this;
 	}
 }

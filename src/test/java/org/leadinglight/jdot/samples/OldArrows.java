@@ -13,7 +13,7 @@ public class OldArrows {
 	public static Graph g() {
 		Graph g = new Graph("G").setRankSep(1.5).setSplines(true).setOverlap(false);
 		g.addEdge(new Edge().setLabelDistance(3.0));
-		g.addNode(new Node().setShape(Shape.circle).setWidth("0.5").setLabel(""));
+		g.addNode(new Node().setShape(Shape.circle).setWidth(0.5).setLabel(""));
 		g.addSubGraph(new SubGraph().addEdges(
 				new Edge().setDir(Dir.back).setSameHead("ahead"),
 				new Edge("a", "Z").setArrowTail(ArrowType.none).setTailLabel("none"),

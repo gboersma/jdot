@@ -15,7 +15,7 @@ public class Pmpipe {
 		// Style node
 		g.addNode(new Node().setFontSize(14).setFontName("Times-Roman")
 				.setFontColor(Color.X11.black).setShape(Shape.box)
-				.setColor(Color.X11.black).setWidth("0.5"));
+				.setColor(Color.X11.black).setWidth(0.5));
 		// Style edge
 		g.addEdge(new Edge().setFontSize(14).setFontName("Times-Roman")
 				.setFontColor(Color.X11.black).setColor(Color.X11.black));

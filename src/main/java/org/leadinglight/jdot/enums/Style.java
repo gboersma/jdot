@@ -12,4 +12,8 @@ public class Style {
 	public enum Node {
 		solid, dashed, dotted, bold, rounded, diagonals, filled, striped, wedged, invis
 	}
+	
+	public enum Graph {
+		radial
+	}
 }
