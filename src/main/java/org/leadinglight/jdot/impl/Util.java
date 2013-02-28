@@ -3,6 +3,7 @@ package org.leadinglight.jdot.impl;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -39,8 +40,11 @@ public class Util {
 	  return out.toString();
 	}
 	
-	public static String sh(String cmd) {
-		return sh(cmd, null);
+	public static String[] append(String[] array, String item) {
+	    final int N = array.length;
+	    array = Arrays.copyOf(array, N + 1);
+	    array[N] = item;
+	    return array;
 	}
 	
 	public static String toTempFile(String content) {
@@ -49,13 +53,6 @@ public class Util {
 		} catch(IOException e) {
 			throw new RuntimeException(e);
 		}
-	}
-	
-	public static String[] append(String[] array, String item) {
-	    final int N = array.length;
-	    array = Arrays.copyOf(array, N + 1);
-	    array[N] = item;
-	    return array;
 	}
 	
 	public static String toFile(String content, File file) {
@@ -69,7 +66,34 @@ public class Util {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public static String fromFile(File file) {
+		try {
+		    BufferedReader br = new BufferedReader(new FileReader(file));
+		    try {
+		        StringBuilder sb = new StringBuilder();
+		        String line = br.readLine();
+	
+		        while (line != null) {
+		            sb.append(line);
+		            sb.append("\n");
+		            line = br.readLine();
+		        }
+		        return sb.toString();
+			} catch(IOException e) {
+				throw new RuntimeException(e);
+		    } finally {
+		        br.close();
+		    }
+		} catch(IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
+	public static String sh(String cmd) {
+		return sh(cmd, null);
+	}
+	
 	public static String sh(String cmd, String input) {
 		try {
 			Process p = Runtime.getRuntime().exec(cmd);

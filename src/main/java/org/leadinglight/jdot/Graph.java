@@ -154,6 +154,14 @@ public class Graph extends AbstractGraph {
 		Util.sh(Util.append(browserCmd, "file://" + filename));
 	}
 	
+	public static String dot2out(String format, String dot) {
+		return dot2out(DEFAULT_CMD, "svg", dot);
+	}
+	
+	public static String dot2out(String cmd, String format, String dot) {
+		return Util.sh(new String[]{cmd, "-T" + format}, dot);
+	}
+	
 	public static String DEFAULT_CMD = "/usr/local/bin/dot";
 	public static String[] DEFAULT_BROWSER_CMD = new String[]{"open", "-a", "Google Chrome.app"};
 

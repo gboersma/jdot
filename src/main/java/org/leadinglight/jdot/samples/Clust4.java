@@ -10,9 +10,9 @@ public class Clust4 {
 
 	public static Graph g() {
 		Graph g = new Graph("G");
-		g.addClusterGraph(new ClusterGraph("_c0").setStyle(Style.ClusterGraph.filled).setColor(Color.X11.lightgrey).setLabel("process #1").addNode(
+		g.addClusterGraph(new ClusterGraph("_0").setStyle(Style.ClusterGraph.filled).setColor(Color.X11.lightgrey).setLabel("process #1").addNode(
 				new Node().setStyle(Style.Node.filled).setColor(Color.X11.white)).addEdge("a0", "a1", "a2", "a3"));
-		g.addClusterGraph(new ClusterGraph("_c1").setColor(Color.X11.blue).setLabel("process #2").addNode(
+		g.addClusterGraph(new ClusterGraph("_1").setColor(Color.X11.blue).setLabel("process #2").addNode(
 				new Node().setStyle(Style.Node.filled)).addEdge("b0", "b1", "b2", "b3"));
 		g.addNodes(
 				new Node("start").setShape(Shape.Mdiamond),
