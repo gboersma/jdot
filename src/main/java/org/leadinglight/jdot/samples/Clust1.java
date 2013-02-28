@@ -4,9 +4,7 @@ import org.leadinglight.jdot.*;
 
 public class Clust1 {
 	public static void main(String[] args) {
-		Graph g = g();
-		System.out.println(g.toDot());
-		g.dot2svg();
+		g().viewSvg();
 	}
 
 	public static Graph g() {

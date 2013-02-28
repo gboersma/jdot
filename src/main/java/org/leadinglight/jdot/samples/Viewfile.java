@@ -5,9 +5,7 @@ import org.leadinglight.jdot.enums.*;
 
 public class Viewfile {
 	public static void main(String[] args) {
-		Graph g = g();
-		System.out.println(g.toDot());
-		g.dot2svg();
+		g().viewSvg();
 	}
 	public static Graph g() {
 		Graph g = new Graph("Viewfile");

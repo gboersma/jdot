@@ -3,15 +3,13 @@ package org.leadinglight.jdot.samples;
 import org.leadinglight.jdot.*;
 import org.leadinglight.jdot.enums.*;
 
-public class Undirected {
+public class Directed {
 	public static void main(String[] args) {
-		Graph g = g();
-		System.out.println(g.toDot());
-		g.dot2svg();
+		g().viewSvg();
 	}
 	
 	public static Graph g() {
-		Graph g = new Graph("sample1").setType(GraphType.graph);
+		Graph g = new Graph("sample1").setType(GraphType.digraph);
 		Node n1 = new Node("1").setLabel("Node 1").setColor(Color.X11.green)
 				.setShape(Shape.square);
 		Node n2 = new Node("2").setLabel("Node 2").setColor(Color.X11.purple)

@@ -2,6 +2,8 @@ package org.leadinglight.jdot.impl;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -9,6 +11,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -40,6 +43,33 @@ public class Util {
 		return sh(cmd, null);
 	}
 	
+	public static String toTempFile(String content) {
+		try {
+			return toFile(content, File.createTempFile("jdot", ".out"));
+		} catch(IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public static String[] append(String[] array, String item) {
+	    final int N = array.length;
+	    array = Arrays.copyOf(array, N + 1);
+	    array[N] = item;
+	    return array;
+	}
+	
+	public static String toFile(String content, File file) {
+		try {
+			FileWriter w = new FileWriter(file);
+			w.write(content);
+			w.flush();
+			w.close();
+			return file.toString();
+		} catch(IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	public static String sh(String cmd, String input) {
 		try {
 			Process p = Runtime.getRuntime().exec(cmd);

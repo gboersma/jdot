@@ -1,9 +1,5 @@
 package org.leadinglight.jdot;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import org.leadinglight.jdot.enums.*;
 import org.leadinglight.jdot.impl.*;
 
@@ -114,24 +110,52 @@ public class Graph extends AbstractGraph {
 		dot = dot + "} ";
 		return dot;
 	}
-	
-	public void dot2svg() {
-		try {
-			File tfile = File.createTempFile("temp-file", ".svg");
-			String svg = Util.sh("/usr/local/bin/dot -Tsvg", toDot());
-			//System.out.println("SVG is " + svg);
-			FileWriter w = new FileWriter(tfile);
-			w.write(svg);
-			w.flush();
-			w.close();
-			Util.sh(new String[]{"open", "-a", "Google Chrome.app", "file://" + tfile.toString()});
-		} catch(IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
 
 	private GraphType _type;
 	private boolean _strict;
+	
+	// Graph generate and view commands
+	
+	public String dot2svg() {
+		return dot2svg(DEFAULT_CMD);
+	}
+	
+	public String dot2svg(String cmd) {
+		return dot2(cmd, "svg");
+	}
+	
+	public String dot2(String format) {
+		return dot2(DEFAULT_CMD, format);
+	}
+	
+	public String dot2(String cmd, String format) {
+		return Util.sh(new String[]{cmd, "-T" + format}, toDot());
+	}
+	
+	public String dot2file(String format) {
+		return dot2file(DEFAULT_CMD, format);
+	}
+	
+	public String dot2file(String cmd, String format) {
+		String out = dot2(cmd, format);
+		return Util.toTempFile(out);
+	}
+	
+	public void viewSvg() {
+		view("svg");
+	}
+	
+	public void view(String format) {
+		view(DEFAULT_CMD, format, DEFAULT_BROWSER_CMD);
+	}
+	
+	public void view(String cmd, String format, String[] browserCmd) {
+		String filename = dot2file(cmd, format);
+		Util.sh(Util.append(browserCmd, "file://" + filename));
+	}
+	
+	public static String DEFAULT_CMD = "/usr/local/bin/dot";
+	public static String[] DEFAULT_BROWSER_CMD = new String[]{"open", "-a", "Google Chrome.app"};
 
 	// Attrs
 	
