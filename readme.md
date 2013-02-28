@@ -21,10 +21,10 @@ Usage
 
 This will build the library.
 
-- java -cp target/jdot-0.0.1-SNAPSHOT.jar org.leadinglight.jdot.samples.Abstract
+- java -cp target/jdot-0.0.1-SNAPSHOT.jar info.leadinglight.jdot.samples.Abstract
 
 Generate the graph for the abstract.gv sample (same as in Graphviz distro), and display it in the browser.
-Look in the org.leadinglight.jdot.samples package for a complete list of samples.
+Look in the info.leadinglight.jdot.samples package for a complete list of samples.
 
 License
 =======
