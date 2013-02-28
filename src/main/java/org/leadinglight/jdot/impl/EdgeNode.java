@@ -19,7 +19,7 @@ public class EdgeNode extends AbstractElement {
 		return _label;
 	}
 	
-	public String toDot(boolean linefeed) {
+	public String toDot() {
 		String dot = "\"" + _name + "\"";
 		if(_label != null) {
 			dot = dot + ":" + "\""+ _label + "\"";

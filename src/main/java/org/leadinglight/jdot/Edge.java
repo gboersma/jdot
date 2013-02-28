@@ -56,7 +56,7 @@ public class Edge extends AbstractElement {
 		return _elements.size() == 0;
 	}
 	
-	public String toDot(boolean linefeed) {
+	public String toDot() {
 		String dot;
 
 		if(isStyle()) {
@@ -64,7 +64,7 @@ public class Edge extends AbstractElement {
 		} else {
 			List<String> l = new ArrayList<String>();
 			for(AbstractElement e: _elements) {
-				l.add(e.toDot(linefeed));
+				l.add(e.toDot());
 			}
 			
 			if(_graph instanceof Graph && ((Graph)_graph).getType() == GraphType.graph) {
@@ -75,9 +75,9 @@ public class Edge extends AbstractElement {
 		}
 			
 		if(getAttrs().has()) {
-			dot = dot + " [" + getAttrs().getAsString() + "]" + (linefeed ? "\n" : " ");
+			dot = dot + " [" + getAttrs().getAsString() + "] ";
 		} else {
-			dot = dot + (linefeed ? "\n" : " ");
+			dot = dot + " ";
 		}
 
 		return dot;

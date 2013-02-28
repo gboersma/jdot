@@ -23,7 +23,7 @@ public class Node extends AbstractElement {
 		return _name;
 	}
 	
-	public String toDot(boolean linefeed) {
+	public String toDot() {
 		String dot = "";
 		
 		if (!isStyle()) {
@@ -33,9 +33,9 @@ public class Node extends AbstractElement {
 		}
 		
 		if(getAttrs().has()) {
-			dot = dot + " [" + getAttrs().getAsString() + "]" + (linefeed ? "\n" : " ");
+			dot = dot + " [" + getAttrs().getAsString() + "] ";
 		} else {
-			dot = dot + (linefeed ? "\n" : " ");
+			dot = dot + " ";
 		}
 		
 		return dot;

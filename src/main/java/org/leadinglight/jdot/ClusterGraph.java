@@ -47,7 +47,7 @@ public class ClusterGraph extends AbstractGraph {
 		return this;
 	}
 
-	public String toDot(boolean linefeed) {
+	public String toDot() {
 		String dot = "subgraph";
 		
 		if(getName() != null && getName().length() > 0) {
@@ -58,14 +58,14 @@ public class ClusterGraph extends AbstractGraph {
 			}
 		}
 		
-		dot = dot + " {" + (linefeed ? "\n" : " ");
+		dot = dot + " { ";
 		if(getAttrs().has()) {
-			dot = dot + "graph [" + getAttrs().getAsString() + "]" + (linefeed ? "\n" : " ");
+			dot = dot + "graph [" + getAttrs().getAsString() + "] ";
 		}
 		for(AbstractElement e: getElements()) {
-			dot = dot + e.toDot(linefeed); 
+			dot = dot + e.toDot(); 
 		}
-		dot = dot + "}" + (linefeed ? "\n" : " ");
+		dot = dot + "} ";
 		return dot;
 	}
 	
