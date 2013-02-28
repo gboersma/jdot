@@ -5,4 +5,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>JDOT</name>
   <description>Java library for Graphviz.</description>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 </project>
