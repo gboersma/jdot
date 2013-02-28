@@ -9,7 +9,11 @@ public abstract class AbstractElement {
 		return _attrs;
 	}
 	
-	public abstract String toDot();
+	public abstract String toDot(boolean linefeed);
+	
+	public String toDot() {
+		return toDot(false);
+	}
 	
 	private Attrs _attrs;
 }

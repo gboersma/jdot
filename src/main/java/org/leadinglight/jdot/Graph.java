@@ -22,7 +22,6 @@ import org.leadinglight.jdot.impl.*;
  * TODO Support for addPoint attr type.
  * TODO Support for startType attr type.
  * TODO Support for viewPort attr type.
- * TODO Refactor Edges to use SubGraphs.
  */
 public class Graph extends AbstractGraph {
 	public Graph() {
@@ -90,7 +89,7 @@ public class Graph extends AbstractGraph {
 		return _strict;
 	}
 
-	public String toDot() {
+	public String toDot(boolean linefeed) {
 		String dot = "";
 		
 		if(isStrict()) {
@@ -103,16 +102,16 @@ public class Graph extends AbstractGraph {
 			dot = dot + " " + getName();
 		}
 		
-		dot = dot + " {\n";
+		dot = dot + " {" + (linefeed ? "\n" : " ");
 
 		if(getAttrs().has()) {
-			dot = dot + "graph [" + getAttrs().getAsString() + "]\n";
+			dot = dot + "graph [" + getAttrs().getAsString() + "]" + (linefeed ? "\n" : " ");
 		}
 		
 		for(AbstractElement e: getElements()) {
-			dot = dot + e.toDot(); 
+			dot = dot + e.toDot(linefeed); 
 		}
-		dot = dot + "}\n";
+		dot = dot + "}" + (linefeed ? "\n" : " ");
 		return dot;
 	}
 	

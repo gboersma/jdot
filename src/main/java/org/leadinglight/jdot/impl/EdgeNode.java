@@ -1,6 +1,6 @@
 package org.leadinglight.jdot.impl;
 
-public class EdgeNode {
+public class EdgeNode extends AbstractElement {
 	public EdgeNode(String name) {
 		_name = name;
 		_label = null;
@@ -19,7 +19,7 @@ public class EdgeNode {
 		return _label;
 	}
 	
-	public String toDot() {
+	public String toDot(boolean linefeed) {
 		String dot = "\"" + _name + "\"";
 		if(_label != null) {
 			dot = dot + ":" + "\""+ _label + "\"";

@@ -11,14 +11,14 @@ public class Edge extends AbstractElement {
 	 * An Edge without a start or end is a style edge.
 	 */
 	public Edge() {
-		_edgeNodeLists = new ArrayList<EdgeNodeList>();
+		_elements = new ArrayList<AbstractElement>();
 	}
 	
 	public Edge(String name, String ... names) {
-		_edgeNodeLists = new ArrayList<EdgeNodeList>();
-		_edgeNodeLists.add(new EdgeNodeList(name));
+		_elements = new ArrayList<AbstractElement>();
+		_elements.add(new EdgeNode(name));
 		for(String n: names) {
-			_edgeNodeLists.add(new EdgeNodeList(n));
+			_elements.add(new EdgeNode(n));
 		}
 		_graph = null;
 	}
@@ -33,32 +33,38 @@ public class Edge extends AbstractElement {
 	}
 	
 	public Edge addNode(String name, String label) {
-		_edgeNodeLists.add(new EdgeNodeList().addNode(name, label));
+		_elements.add(new EdgeNode(name, label));
 		return this;
 	}
 	
-	public Edge addNodes(String ... names) {
-		EdgeNodeList enl = new EdgeNodeList();
-		_edgeNodeLists.add(enl);
-		for(String name: names) {
-			enl.addNode(name);
+	public Edge addNodes(String name, String ... names) {
+		SubGraph sg = new SubGraph();
+		sg.addNode(new Node(name));
+		for(String n: names) {
+			sg.addNode(new Node(n));
 		}
+		addSubGraph(sg);
+		return this;
+	}
+	
+	public Edge addSubGraph(SubGraph graph) {
+		_elements.add(graph);
 		return this;
 	}
 	
 	public boolean isStyle() {
-		return _edgeNodeLists.size() == 0;
+		return _elements.size() == 0;
 	}
 	
-	public String toDot() {
+	public String toDot(boolean linefeed) {
 		String dot;
 
 		if(isStyle()) {
 			dot = "edge";
 		} else {
 			List<String> l = new ArrayList<String>();
-			for(EdgeNodeList enl: _edgeNodeLists) {
-				l.add(enl.toDot());
+			for(AbstractElement e: _elements) {
+				l.add(e.toDot(linefeed));
 			}
 			
 			if(_graph instanceof Graph && ((Graph)_graph).getType() == GraphType.graph) {
@@ -69,15 +75,15 @@ public class Edge extends AbstractElement {
 		}
 			
 		if(getAttrs().has()) {
-			dot = dot + " [" + getAttrs().getAsString() + "]\n";
+			dot = dot + " [" + getAttrs().getAsString() + "]" + (linefeed ? "\n" : " ");
 		} else {
-			dot = dot + "\n";
+			dot = dot + (linefeed ? "\n" : " ");
 		}
 
 		return dot;
 	}
 	
-	private List<EdgeNodeList> _edgeNodeLists;
+	private List<AbstractElement> _elements;
 	private AbstractGraph _graph;
 	
 	// Attrs

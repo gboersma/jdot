@@ -47,26 +47,26 @@ public class SubGraph extends AbstractGraph {
 		return this;
 	}
 
-	public String toDot() {
+	public String toDot(boolean linefeed) {
 		String dot = "";
 		
 		if(getName() != null && getName().length() > 0) {
 			dot = dot + "subgraph " + getName() + " ";
 		}
 		
-		dot = dot + "{\n";
+		dot = dot + "{" + (linefeed ? "\n" : " ");
 
 		if(getAttrs().has()) {
-			dot = dot + "graph [" + getAttrs().getAsString() + "]\n";
+			dot = dot + "graph [" + getAttrs().getAsString() + "]" + (linefeed ? "\n" : " ");
 		}
 
 		if(_rank != null) {
-			dot = dot + "rank=" + _rank + "\n";
+			dot = dot + "rank=" + _rank + (linefeed ? "\n" : " ");
 		}
 		for(AbstractElement e: getElements()) {
-			dot = dot + e.toDot(); 
+			dot = dot + e.toDot(linefeed); 
 		}
-		dot = dot + "}\n";
+		dot = dot + "}" + (linefeed ? "\n" : " ");
 		return dot;
 	}
 	
