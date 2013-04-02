@@ -63,7 +63,7 @@ public abstract class AbstractGraph extends AbstractElement {
 		}
 	}
 	
-	private Node getNodeOrNull(String name) {
+	public Node getNodeOrNull(String name) {
 		for(AbstractElement e : _elements) {
 			if(e instanceof Node && ((Node)e).getName().equals(name)) {
 				return (Node)e;
@@ -77,6 +77,10 @@ public abstract class AbstractGraph extends AbstractElement {
 		}
 		return null;
 	}
+
+    public boolean hasNode(String name) {
+        return getNodeOrNull(name) != null;
+    }
 	
 	public AbstractGraph addEdge(Edge e) {
 		_elements.add(e.setGraph(this));
