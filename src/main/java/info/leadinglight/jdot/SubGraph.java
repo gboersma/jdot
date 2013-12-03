@@ -19,21 +19,25 @@ public class SubGraph extends AbstractGraph {
         return this;
     }
 
+    @Override
     public SubGraph addNodes(Node... nodes) {
         super.addNodes(nodes);
         return this;
     }
 
+    @Override
     public SubGraph addEdge(Edge e) {
         super.addEdge(e);
         return this;
     }
 
+    @Override
     public SubGraph addEdge(String name, String... names) {
         super.addEdge(name, names);
         return this;
     }
 
+    @Override
     public SubGraph addEdges(Edge... edges) {
         super.addEdges(edges);
         return this;
@@ -49,6 +53,7 @@ public class SubGraph extends AbstractGraph {
         return this;
     }
 
+    @Override
     public String toDot() {
         String dot = "";
 

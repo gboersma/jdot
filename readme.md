@@ -6,13 +6,13 @@ Java library that provides wrapper for Graphviz. Generates DOT and uses Graphviz
 Dependencies
 ============
 
-- Assumes that dot executable is located in /usr/local/bin. 
+- Requires the dot executable.
 
-If you need to change this, you will need to specify the command in the sample code.
+By default, is located in /usr/local/bin. Use Graph.setDefaultCmd to change it.
 
-- Assumes that browser is invoked with "open -a 'Google Chrome.app'".
+- Requires a browser to display graphs.
 
-If you need to change this, you will need to specify the browser command in the sample code.  
+By default, the command to open the file on the browser is "open -a 'Google Chrome.app'". Use Graph.setDefaultBrowserCmd to change it.
 
 Usage
 =====
@@ -21,10 +21,12 @@ Usage
 
 This will build the library.
 
-- java -cp target/jdot-0.0.1-SNAPSHOT.jar info.leadinglight.jdot.samples.Abstract
+There are samples that are equivalent to the GraphViz-provided samples in the test package. The following command
+generates the graph for the abstract.gv sample and displays it in the browser.
 
-Generate the graph for the abstract.gv sample (same as in Graphviz distro), and display it in the browser.
-Look in the info.leadinglight.jdot.samples package for a complete list of samples.
+- java -cp target/test-classes/.:target/jdot-1.0.0.jar info.leadinglight.jdot.samples.Abstract
+
+Look in the test package info.leadinglight.jdot.samples package for a complete list of samples.
 
 License
 =======
