@@ -1,7 +1,7 @@
 package info.leadinglight.jdot.test;
 
 import info.leadinglight.jdot.*;
-import info.leadinglight.jdot.impl.*;
+import info.leadinglight.jdot.impl.Util;
 import info.leadinglight.jdot.samples.*;
 
 import java.io.File;
