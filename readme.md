@@ -33,11 +33,11 @@ Look in the test package info.leadinglight.jdot.samples package for a complete l
 Dependencies
 ============
 
-Requires the dot executable. By default, is located in /usr/local/bin. Use Graph.setDefaultCmd to change it.
+- Requires the dot executable. By default, is located in /usr/local/bin. Use Graph.setDefaultCmd to change it.
 
 Note: For Mac OS X, homebrew has a recipe for Graphviz that puts the executable here.
 
-Not required, but supports viewing graphs in a browser. By default, the command to open the file on the browser is "open -a 'Google Chrome.app'". Use Graph.setDefaultBrowserCmd to change it.
+- Not required, but JDot supports viewing graphs in a browser. By default, the command to open the file on the browser is "open -a 'Google Chrome.app'". Use Graph.setDefaultBrowserCmd to change it.
 
 Distribution
 ============
@@ -72,9 +72,7 @@ Copyright 2013 Gerald Boersma <gerald dot boersma at gmail dot com>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
+You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
