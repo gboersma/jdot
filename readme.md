@@ -54,7 +54,7 @@ Use the following command to generate the samples and display them in the browse
 License
 =======
 
-Copyright 2013 Gerald Boersma <gerald.boersma@gmail.com>
+Copyright 2013 Gerald Boersma <gerald dot boersma at gmail dot com>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this except in compliance with the License.
