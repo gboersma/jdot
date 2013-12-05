@@ -39,8 +39,22 @@ Note: For Mac OS X, homebrew has a recipe for Graphviz that puts the executable 
 
 Not required, but supports viewing graphs in a browser. By default, the command to open the file on the browser is "open -a 'Google Chrome.app'". Use Graph.setDefaultBrowserCmd to change it.
 
+Distribution
+============
+
+Available from Maven Central. Add the following to your pom:
+
+    :::xml
+        <dependency>
+            <groupId>info.leadinglight</groupId>
+            <artifactId>jdot</artifactId>
+            <version>1.0</version>
+        </dependency>
+
 Building from Source
 ====================
+
+Use Maven:
 
 - mvn clean install
 
