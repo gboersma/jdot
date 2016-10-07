@@ -1,10 +1,4 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
-    </parent>
-    
     <modelVersion>4.0.0</modelVersion>
     <groupId>info.leadinglight</groupId>
     <artifactId>jdot</artifactId>
@@ -13,39 +7,7 @@
 
     <name>JDot</name>
     <description>Java library for Graphviz.</description>
-    <url>http://jdot.leadinglight.info</url>
     
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-    
-    <scm>
-        <connection>scm:git:git@bitbucket.org:gboersma/jdot.git</connection>
-        <developerConnection>scm:git:git@bitbucket.org:gboersma/jdot.git</developerConnection>
-        <url>git@bitbucket.org:gboersma/jdot.git</url>
-      <tag>HEAD</tag>
-  </scm>
-  
-    <developers>
-        <developer>
-            <id>gboersma</id>
-            <name>Gerald Boersma</name>
-            <email>gerald.boersma@gmail.com</email>
-            <url>http://leadinglight.info</url>
-            <organization>Leading Light Consulting Ltd.</organization>
-            <organizationUrl>http://leadinglight.info</organizationUrl>
-            <roles>
-                <role>architect</role>
-                <role>developer</role>
-            </roles>
-            <timezone>-8</timezone>
-        </developer>
-    </developers>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -62,8 +24,8 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>2.3.2</version>
                     <configuration>
-                        <source>1.6</source>
-                        <target>1.6</target>
+                        <source>1.8</source>
+                        <target>1.8</target>
                     </configuration>
                 </plugin>
             </plugins>

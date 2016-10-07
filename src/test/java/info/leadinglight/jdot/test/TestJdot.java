@@ -1,18 +1,3 @@
-/**
-    Copyright 2013 Gerald Boersma <gerald dot boersma at gmail dot com>
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
- */
 package info.leadinglight.jdot.test;
 
 import info.leadinglight.jdot.*;
@@ -161,14 +146,27 @@ public class TestJdot {
         //System.out.println(filename + ":\n" + g.toDot());
         String svg1 = g.dot2svg();
         String svg2 = dot2svg(filename);
-        return svg1.equals(svg2);
+        boolean match = svg1.equals(svg2);
+        if (!match) {
+            System.out.println("Graph output does not match. This is likely due to some difference between the JDot DOT file and the GraphViz DOT file:");
+            System.out.println("JDot DOT file:");
+            System.out.println(g.toDot());
+            System.out.println("Reference DOT file:");
+            System.out.println(dotFile(filename));
+        }
+        return match;
     }
 
     private String dot2svg(String filename) {
+        String dot = dotFile(filename);
+        String svg = Graph.dot2out("svg", dot);
+        return svg;
+    }
+    
+    private String dotFile(String filename) {
         URL url = this.getClass().getResource("/" + filename);
         File testFile = new File(url.getFile());
         String dot = Util.fromFile(testFile);
-        String svg = Graph.dot2out("svg", dot);
-        return svg;
+        return dot;
     }
 }
