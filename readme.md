@@ -51,6 +51,8 @@ Available from Maven Central. Add the following to your pom:
             <version>1.0</version>
         </dependency>
 
+Note: It is highly recommended that you build from source, as this is a old version that does not reflect the latest updates.
+
 Building from Source
 ====================
 
@@ -79,4 +81,4 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
- 
+
